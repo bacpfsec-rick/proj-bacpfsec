@@ -38,9 +38,11 @@ void read_tasks(ifstream& ifs, vector<task>& tasks);
 void read_states(ifstream& ifs, task& bk);
 void show_record(ostream& os, vector<task>& tasks);
 void write_record(ofstream& ofs, vector<task>& tasks);
+void brief_report(ostream& os, vector<task>& tasks);
 bool instruct();
 void timeline(ostream& os, vector<task>& tasks, int start, int end);
 void print_day(ostream& os, int time);
+void next_day(int& today);
 
 int main() {
   cout<<"----------------------"<<endl;
@@ -55,7 +57,7 @@ int main() {
 
 void init() {
   recordLoaded = false;
-  startDate = 1<31;
+  startDate = 99999999;
   endDate = 0;
   numOfTaskUncomplete = 0;
   if( !tasks.empty() ) {
@@ -66,11 +68,12 @@ void init() {
 
 bool instruct() {
   char i;
-  cout<<"   (Command list)"<<endl<<"   ";
+  cout<<"   (Command List)"<<endl<<"   ";
   cout<<(recordLoaded ? "" : "(1-Load) ");
   cout<<(recordLoaded ? "(2-List) " : "");
   cout<<(recordLoaded ? "(3-Save) " : "");
   cout<<(recordLoaded ? "(4-Time) " : "");
+  cout<<(recordLoaded ? "(5-Info) " : "");
   cout<<"(8-Quit) ";
   cout<<endl<<">>> ";
   cin>>i;
@@ -78,6 +81,8 @@ bool instruct() {
   case '1':
     {
     ifstream ifs;
+    ifs.open("data.pfs");
+    /*
     string data;
     cout<<"   Read data from file:";
     cin>>data;
@@ -85,6 +90,7 @@ bool instruct() {
     if (!ifs.is_open()) {
       cout<<"   ***No such file***";
     }
+    */
     tasks.clear();
     read_tasks(ifs,tasks);
     ifs.close();
@@ -98,10 +104,13 @@ bool instruct() {
   case '3':
     {
       ofstream ofs;
+      /*
       string data;
       cout<<"   Save data to file  :";
       cin>>data;
       ofs.open(data);
+      */
+      ofs.open("data.pfs");
       write_record(ofs,tasks);
       ofs.close();
       break;
@@ -110,9 +119,14 @@ bool instruct() {
     {
       int start,end;
       cout<<"   (Input Format)"<<endl;
-      cout<<"   (YYYYMMDD YYYYMMDD) --- eg. 20150101 20151231"<<endl<<">>>";
+      cout<<"   (YYMMDD YYMMDD) --- eg. 150101 151231"<<endl<<">>>";
       cin>>start>>end;
       timeline(cout,tasks,start,end);
+      break;
+    }
+  case '5':
+    {
+      brief_report(cout,tasks);
       break;
     }
   default:
@@ -195,27 +209,105 @@ void write_record(ofstream& ofs, vector<task>& tasks) {
 }
 
 void timeline(ostream& os, vector<task>& tasks, int start, int end) {
-  time_t st(startDate),s(0), et(endDate), e(0);
-  struct tm* cst = localtime(&st);
-  struct tm* cs = localtime(&s);
-  cs->tm_year = start/10000-1900;
-  cs->tm_mon = start/100%100-1;
-  cs->tm_mday = start%100;
-  struct tm* cet = localtime(&et);
-  struct tm* ce = localtime(&e);
-  ce->tm_year = end/10000-1900;
-  ce->tm_mon = end/100%100-1;
-  ce->tm_mday = end%100;
-  if ((cst->tm_year>ce->tm_year) ||
-      (cst->tm_year==ce->tm_year && cst->tm_mon>ce->tm_mon) ||
-      (cst->tm_year==ce->tm_year && cst->tm_mon==ce->tm_mon 
-       && cst->tm_mday>ce->tm_mday) ||
-      (cet->tm_year<cs->tm_year) ||
-      (cet->tm_year==cs->tm_year && cet->tm_mon<cs->tm_mon) ||
-      (cet->tm_year==cs->tm_year && cet->tm_mon==cs->tm_mon 
-       && cet->tm_mday<cs->tm_mday) ) {
+  int sd_year=(startDate)/10000, ed_year=(endDate)/10000,
+    s_year=start/10000, e_year=end/10000;
+  int sd_mon=(startDate)/100%100, ed_mon=(endDate)/100%100,
+    s_mon=start/100%100, e_mon=end/100%100;
+  int sd_day=(startDate)%100, ed_day=(endDate)%100,
+    s_day=start%100, e_day=end%100;
+  if ((sd_year>e_year) ||
+      (sd_year==e_year && sd_mon>e_mon) ||
+      (sd_year==e_year && sd_mon==e_mon && sd_day>e_day) ||
+      (ed_year<s_year) ||
+      (ed_year==s_year && ed_mon<s_mon) ||
+      (ed_year==s_year && ed_mon==s_mon && ed_day<s_day) ) {
     os<<"   ***Nothing done in given period***"<<endl;
   } else {
-
+    // print title
+    os<<"   Date\\Task\t";
+    for (int i=0; i<tasks.size(); ++i) {
+      os<<tasks[i].name<<"\t";
+    }
+    os<<endl;
+    // print date
+    int track[tasks.size()];
+    for(int i=0; i<tasks.size(); ++i) {
+      track[i]=0;
+    }
+    for(int i=start; i<=endDate; next_day(i)) {
+      os<<"   ";
+      print_day(os,i);
+      os<<"\t";
+      for(int j=0; j<tasks.size(); ++j) {
+	if (tasks[j].states[track[j]].date==i) {
+	  os<<tasks[j].states[track[j]].content;
+	  ++track[j];
+	}
+	os<<"\t";
+      }
+      os<<endl;
+    }
   }
+}
+
+void brief_report(ostream& os, vector<task>& tasks) {
+  os<<"   First date of the recording : "<<startDate<<endl;
+  os<<"   Last date of updating data  : "<<endDate<<endl;
+  os<<"   Number of tasks in progress : "<<numOfTaskUncomplete<<endl;
+  os<<"   Number of tasks completed   : "<<
+    (tasks.size()-numOfTaskUncomplete)<<endl;
+}
+
+void next_day(int& today) {
+  int year = today/10000, mon = today/100%100, day=today%100;
+  int result;
+  // init the result to imaginary date before true result
+  switch(mon) { 
+  case 1 :case 3 :case 5 :case 7 :case 8 :case 10:
+    {
+      if (day!=31) {
+	result = today;
+      } else {
+	result=year*10000+(mon+1)*100+0;
+      }
+    break;
+    }
+  case 4 :case 6 :case 9 :case 11 :
+    {
+      if (day!=30) {
+	result = today;
+      } else {
+	result=year*10000+(mon+1)*100+0;
+      }
+      break;
+    }
+  case 2:
+    {
+      if (day<28) {
+	result = today;
+      } else if (day==29) {
+	result=year*10000+(mon+1)*100+0;
+      } else {
+	if(year%4!=0 || (year%4==0&&year%400!=0)) { // ! lunar year
+	  result=year*10000+(mon+1)*100+0;
+	} else {
+	  result = today;
+	}
+      }
+      break;    
+    }
+  case 12: 
+    {
+      if (day!=31) {
+	result = today;
+      } else {
+	result=(year+1)*10000+1*100+0;
+      }
+      break;
+    }
+  default:
+    break;
+  }
+  ++result;
+  today = result;
 }
