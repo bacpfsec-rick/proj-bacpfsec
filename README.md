@@ -1,5 +1,16 @@
-Project     : Pfsee (Parallel Full Stack Engineering Executive)
+Project     : 
+	    Pfsee (Parallel Full Stack Engineering Executive)
 Description :
+	    Back to August, 2014, an idea of making a personal multi-project 
+	    management software flash into my mind.
+	    Not until I saw the concept	of FSE(full stack engineer) 
+	    did I started the actual coding of Pfsee.
+	    With some casual time, the Pfsee1.0 is now released.
+	    The TUI is simple, but the idea behind it is attractive:
+	    Based on the knowledge of FSE and sub-consciousness,
+	    the most efficient way for multi-project management is to treat
+	    your brain as CPU, let the projects come across on the bus,
+	    then solve them by using DIVIDE AND CONQUER!
 Version     :
 v0.1	    150212	Design basic data structure of the Pfsee	
 	    ADD		static vector<task> tasks;
