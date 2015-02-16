@@ -389,7 +389,7 @@ int select_task(ostream& os, istream& is, vector<task>& tasks) {
   os<<"   (0-Random)";
   for(int i=0; i<tasks.size(); ++i) {
     if(tasks[i].finish==0) {
-      os<<" ("<<i<<"-"<<tasks[i].name<<")";
+      os<<" ("<<i+1<<"-"<<tasks[i].name<<")";
     }
   }
   os<<endl<<">>>";
@@ -399,11 +399,12 @@ int select_task(ostream& os, istream& is, vector<task>& tasks) {
     do {
       choice = rand()%tasks.size();
     } while (tasks[choice].finish==1);
+    return choice;
   } else if (choice> numOfTaskUncomplete) {
     os<<"   ***Invalid choice***"<<endl;
     select_task(os,is,tasks);
   }
-  return choice;
+  return choice-1;
 }
 
 void working(ostream& os, istream& is, task& task, int& redo) {
