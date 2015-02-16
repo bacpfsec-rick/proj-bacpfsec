@@ -8,6 +8,11 @@
 using namespace std;
 
 /*
+  Define some constant value by user's preference
+ */
+#define maxTaskInProgress 5
+
+/*
   Data structure
 */
 struct state{
@@ -43,8 +48,16 @@ bool instruct();
 void timeline(ostream& os, vector<task>& tasks, int start, int end);
 void print_day(ostream& os, int time);
 void next_day(int& today);
-
+void select_action(ostream& os, istream& is, vector<task>& tasks);
+int select_task(ostream& os,istream& is, vector<task>& tasks);
+void working(ostream& os, istream& is, task& task, int& redo);
+/*
+  main
+*/
 int main() {
+  // set up
+  srand(time(NULL));
+
   cout<<"----------------------"<<endl;
   cout<<"|  Welcome to Pfsee  |"<<endl;
   cout<<"----------------------"<<endl;
@@ -55,6 +68,9 @@ int main() {
   return 0;
 }
 
+/*
+  Functoin declarations
+*/
 void init() {
   recordLoaded = false;
   startDate = 99999999;
@@ -68,51 +84,50 @@ void init() {
 
 bool instruct() {
   char i;
-  cout<<"   (Command List)"<<endl<<"   ";
+  // cout<<"   (Command List)"<<endl<<"   ";
+  cout<<"   ";
   cout<<(recordLoaded ? "" : "(1-Load) ");
-  cout<<(recordLoaded ? "(2-List) " : "");
-  cout<<(recordLoaded ? "(3-Save) " : "");
-  cout<<(recordLoaded ? "(4-Time) " : "");
-  cout<<(recordLoaded ? "(5-Info) " : "");
+  cout<<(recordLoaded ? "(1-Rec Info) " : "");
+  cout<<(recordLoaded ? "(2-List rec) " : "");
+  cout<<(recordLoaded ? "(3-WORK NOW) " : "");
+  cout<<(recordLoaded ? "(4-Timeline) " : "");
+  cout<<(recordLoaded ? "(5-Save rec) " : "");
   cout<<"(8-Quit) ";
   cout<<endl<<">>> ";
   cin>>i;
+  // Menu without record
+  if (!recordLoaded) {
+    switch(i) {
+    case '1':
+      {
+	ifstream ifs;
+	ifs.open("data.pfs");
+	tasks.clear();
+	read_tasks(ifs,tasks);
+	ifs.close();
+	cout<<"   (Record is loaded into Pfsee)"<<endl;
+	return true;
+	break;
+      }
+      default:
+	return false;
+    }
+  }
+  // Menu with record
   switch(i) {
-  case '1':
-    {
-    ifstream ifs;
-    ifs.open("data.pfs");
-    /*
-    string data;
-    cout<<"   Read data from file:";
-    cin>>data;
-    ifs.open(data);
-    if (!ifs.is_open()) {
-      cout<<"   ***No such file***";
-    }
-    */
-    tasks.clear();
-    read_tasks(ifs,tasks);
-    ifs.close();
-    break;
-    }
   case '2':
     {
-    show_record(cout,tasks);
-    break;
+      cout<<"   (List the tasks in progress)"<<endl;
+	show_record(cout,tasks);
+      break;
     }
-  case '3':
+  case '5':
     {
       ofstream ofs;
-      /*
-      string data;
-      cout<<"   Save data to file  :";
-      cin>>data;
-      ofs.open(data);
-      */
       ofs.open("data.pfs");
       write_record(ofs,tasks);
       ofs.close();
+      cout<<"   (Record is saved)"<<endl;
       break;
     }
   case '4':
@@ -121,12 +136,20 @@ bool instruct() {
       cout<<"   (Input Format)"<<endl;
       cout<<"   (YYMMDD YYMMDD) --- eg. 150101 151231"<<endl<<">>>";
       cin>>start>>end;
+      cout<<"   (Timeline from "<<start<<"~"<<end<<")"<<endl;
       timeline(cout,tasks,start,end);
       break;
     }
-  case '5':
+  case '1':
     {
+      cout<<"   (Brief report about records)"<<endl;
       brief_report(cout,tasks);
+      break;
+    }
+  case '3':
+    {
+      cout<<"   (TIME TO PFSEE)"<<endl;
+      select_action(cout,cin,tasks);
       break;
     }
   default:
@@ -179,8 +202,8 @@ void read_states(ifstream& ifs, task& bk) {
 void show_record(ostream& os, vector<task>& tasks) {
   for(int i=0; i<tasks.size(); ++i) {
     if (tasks[i].finish!=1) { // print only the tasks in progress
-      os<<" Task name : "<<tasks[i].name<<endl;
-      os<<" Progress  : ";
+      os<<"    Task name : "<<tasks[i].name<<endl;
+      os<<"    Progress  : ";
       for(int j=0; j<tasks[i].states.size(); ++j) {
 	//	time_t t(tasks[i].states[j].date);
 	//	struct tm* current_time = localtime(&t);
@@ -226,7 +249,7 @@ void timeline(ostream& os, vector<task>& tasks, int start, int end) {
     // print title
     os<<"   Date\\Task\t";
     for (int i=0; i<tasks.size(); ++i) {
-      os<<tasks[i].name<<"\t";
+      os<<tasks[i].name<<"\t\t";
     }
     os<<endl;
     // print date
@@ -243,7 +266,7 @@ void timeline(ostream& os, vector<task>& tasks, int start, int end) {
 	  os<<tasks[j].states[track[j]].content;
 	  ++track[j];
 	}
-	os<<"\t";
+	os<<"\t\t";
       }
       os<<endl;
     }
@@ -310,4 +333,113 @@ void next_day(int& today) {
   }
   ++result;
   today = result;
+}
+
+void select_action(ostream& os, istream& is, vector<task>& tasks) {
+  os<<"   (0-Back) "<<
+    ((numOfTaskUncomplete == 0) ? "" : "(1-Continue uncompleted work) ")<<
+    ((numOfTaskUncomplete < maxTaskInProgress) ? 
+     "(2-Start new work)" : "")<<endl;
+  int choice;
+  os<<">>>";
+  is>>choice;
+  if (choice==0) {
+    return;
+  } else if (choice==1) {
+    if (numOfTaskUncomplete == 0) {
+      os<<"   ***Invalid choice***"<<endl;
+      select_action(os,is,tasks);
+    } else {
+      os<<"   (Select an work)"<<endl;
+      int choice = select_task(os,is,tasks);
+      os<<"   (Work on "<<tasks[choice].name<<")"<<endl;
+     int redo=0;
+     working(os,is,tasks[choice],redo);
+    }
+  } else if (choice==2) {
+    if (numOfTaskUncomplete < maxTaskInProgress) {
+      task newTask;
+      os<<"   (Name Format)"<<endl;
+      os<<"   (Less than 10 char) --- eg. Sample_task1"<<endl<<">>>";
+      string name;
+      is>>name;
+      newTask.name = name;
+      newTask.finish = 0;
+      tasks.push_back(newTask);
+      ++numOfTaskUncomplete;
+      os<<"   (Work on "<<newTask.name<<")"<<endl;
+      int redo=0;
+      working(os,is,tasks[tasks.size()-1],redo);
+    } else {
+      os<<"   ***Reach the parallel limit***"<<endl;
+      select_action(os,is,tasks); 
+    }
+  } else {
+    os<<"   ***Invalid choice***"<<endl;
+    select_action(os,is,tasks);
+  }
+}
+
+int select_task(ostream& os, istream& is, vector<task>& tasks) {
+
+  os<<"   (0-Random)";
+  for(int i=0; i<tasks.size(); ++i) {
+    if(tasks[i].finish==0) {
+      os<<" ("<<i<<"-"<<tasks[i].name<<")";
+    }
+  }
+  os<<endl<<">>>";
+  int choice;
+  is>>choice;
+  if (choice==0) {
+    do {
+      choice = rand()%tasks.size();
+    } while (tasks[choice].finish==1);
+  } else if (choice> numOfTaskUncomplete) {
+    os<<"   ***Invalid choice***"<<endl;
+    select_task(os,is,tasks);
+  }
+  return choice;
+}
+
+void working(ostream& os, istream& is, task& task, int& redo) {
+  os<<"   (0-Back) (1-Finish it) (2-Update a new progress)"
+    <<((redo>0) ? " (3-Redo an update) " : "")<<endl<<">>>";
+  int choice;
+  is>>choice;
+  if (choice==0) {
+    return;
+  } else if (choice==1) {
+    task.finish = 1;
+    --numOfTaskUncomplete;
+  } else if (choice==2) {
+    os<<"   (Progress Format)"<<endl;
+    os<<"   (Detail in 20 chars / Date is auto recorded) "<<
+      "--- eg. Chap2 "<<endl<<">>>";
+    string content;
+    is>>content;
+    state newState;
+    newState.content = content;
+    time_t t;
+    time(&t);
+    struct tm* today = localtime(&t);
+    int date;
+    date = (1900+today->tm_year)%100*10000
+      +(1+today->tm_mon)*100+today->tm_mday;
+    newState.date = date;
+    task.states.push_back(newState);
+    os<<"   (Record updated)"<<endl;
+    working(os,is,task,redo);
+  } else if (choice==3) {
+    if (redo>0) {
+      task.states.pop_back();
+      --redo;
+    } else {
+      os<<"   ***Invalid choice***"<<endl;
+      working(os,is,task,redo);
+    }
+  } else {
+    os<<"   ***Invalid choice***"<<endl;
+    working(os,is,task,redo);
+  }
 }
