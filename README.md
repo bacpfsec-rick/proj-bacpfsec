@@ -14,20 +14,23 @@ Description :
 Version     :
 v0.1	    150212	Design basic data structure of the Pfsee	
 	    ADD		static vector<task> tasks;
-	    		void read_tasks(ifstream& ifs, vector<task>& tasks);
-			void read_states(ifstream& ifs, task& bk);
-			void show_record(ostream& os, vector<task>& tasks);
-			void write_record(ofstream& ofs, vector<task>& tasks);
+	    		read_tasks(ifstream& ifs, vector<task>& tasks);
+			read_states(ifstream& ifs, task& bk);
+			show_record(ostream& os, vector<task>& tasks);
+			write_record(ofstream& ofs, vector<task>& tasks);
 			bool instruct();
 v0.2	    150214~15	Improve the recording mechanism
-	    ADD		static bool recordLoaded;
+	    ADD		#define maxTaskInProgress 5
+	    		static bool recordLoaded;
 			static int startDate;
 			static int endDate;
 			static int numOfTaskUncomplete;
-			void init();
+			init();
 			brief_report(ostream& os, vector<task>& tasks);
 			print_day(ostream& os, int time);
 		       	next_day(int& today);
+			timeline(ofstream& os, vector<task>& tasks,
+					     int start, int end);
 	    MODIFY	everything in v0.1
 v0.3	    150215~16	Finish the task execution functions
 	    ADD		select_action(ostream& os, istream& is, 
@@ -41,4 +44,9 @@ V1.0	    150216	Public the practical program at GitHub
 	    PUBLISH	pfsee.cc
 	    		Makefile
 			data.pfs
-V1.1	    ***		Implement the data encryption
+V1.1        150217	Polish the TIMELINE and List Rec with <iomanip>
+	    RECONS.	print_day(ostream& os, int time,int width);
+	    MODIFY	void show_record(ostream& os, vector<task>& tasks);
+			timeline(ofstream& os, vector<task>& tasks,
+					     int start, int end);
+V1.2	    ***		Implement the data encryption

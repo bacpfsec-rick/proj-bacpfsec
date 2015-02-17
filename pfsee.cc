@@ -9,6 +9,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <iomanip>
 using namespace std;
 
 /*
@@ -49,8 +50,8 @@ void show_record(ostream& os, vector<task>& tasks);
 void write_record(ofstream& ofs, vector<task>& tasks);
 void brief_report(ostream& os, vector<task>& tasks);
 bool instruct();
-void timeline(ostream& os, vector<task>& tasks, int start, int end);
-void print_day(ostream& os, int time);
+void timeline(ofstream& os, vector<task>& tasks, int start, int end);
+void print_day(ostream& os, int time, int width);
 void next_day(int& today);
 void select_action(ostream& os, istream& is, vector<task>& tasks);
 int select_task(ostream& os,istream& is, vector<task>& tasks);
@@ -141,7 +142,11 @@ bool instruct() {
       cout<<"   (YYMMDD YYMMDD) --- eg. 150101 151231"<<endl<<">>>";
       cin>>start>>end;
       cout<<"   (Timeline from "<<start<<"~"<<end<<")"<<endl;
-      timeline(cout,tasks,start,end);
+      ofstream ofs;
+      ofs.open("TIMELINE");
+      timeline(ofs,tasks,start,end);
+      ofs.close();
+      cout<<"   (Output to TIMELINE file)"<<endl;
       break;
     }
   case '1':
@@ -209,19 +214,29 @@ void show_record(ostream& os, vector<task>& tasks) {
       os<<"    Task name : "<<tasks[i].name<<endl;
       os<<"    Progress  : ";
       for(int j=0; j<tasks[i].states.size(); ++j) {
-	//	time_t t(tasks[i].states[j].date);
-	//	struct tm* current_time = localtime(&t);
-	os<<tasks[i].states[j].content<<"[";
-	print_day(os,tasks[i].states[j].date);
-	os<<"]\t";
+	string content = tasks[i].states[j].content; 
+	os<<content<<"[";
+	int date = tasks[i].states[j].date, width = 6;
+	if (date/1000%10==0) { // XX0XXX
+	  --width;
+	}
+	if (date/10%10==0) {   // XXXX0X
+	  --width;
+	}
+	print_day(os,date,width);
+	os<<left<<setw(18-content.size()-2-width)<<"]";
       }
       os<<endl;
     }
   }
 }
 
-void print_day(ostream& os, int time) {
-  os<<time/10000<<"-"<<time/100%100<<"-"<<time%100;
+void print_day(ostream& os, int time, int width) {
+  stringstream ss;
+  ss<<(time/10000)<<"-"<<(time/100%100)<<"-"<<(time%100);
+  string t;
+  ss>>t;
+  os<<left<<setw(width)<<t;
 }
 
 void write_record(ofstream& ofs, vector<task>& tasks) {
@@ -235,7 +250,7 @@ void write_record(ofstream& ofs, vector<task>& tasks) {
   recordLoaded = false;
 }
 
-void timeline(ostream& os, vector<task>& tasks, int start, int end) {
+void timeline(ofstream& os, vector<task>& tasks, int start, int end) {
   int sd_year=(startDate)/10000, ed_year=(endDate)/10000,
     s_year=start/10000, e_year=end/10000;
   int sd_mon=(startDate)/100%100, ed_mon=(endDate)/100%100,
@@ -251,9 +266,9 @@ void timeline(ostream& os, vector<task>& tasks, int start, int end) {
     os<<"   ***Nothing done in given period***"<<endl;
   } else {
     // print title
-    os<<"   Date\\Task\t";
+    os<<left<<setw(20)<<"Date\\Task";
     for (int i=0; i<tasks.size(); ++i) {
-      os<<tasks[i].name<<"\t\t";
+      os<<left<<setw(20)<<tasks[i].name;
     }
     os<<endl;
     // print date
@@ -262,15 +277,17 @@ void timeline(ostream& os, vector<task>& tasks, int start, int end) {
       track[i]=0;
     }
     for(int i=start; i<=endDate; next_day(i)) {
-      os<<"   ";
-      print_day(os,i);
-      os<<"\t";
+      print_day(os,i,20);
       for(int j=0; j<tasks.size(); ++j) {
-	if (tasks[j].states[track[j]].date==i) {
-	  os<<tasks[j].states[track[j]].content;
+	while( tasks[j].states[track[j]].date<i) { // trace to partial start
 	  ++track[j];
 	}
-	os<<"\t\t";
+	if (tasks[j].states[track[j]].date==i) {
+	  os<<left<<setw(20)<<tasks[j].states[track[j]].content;
+	  ++track[j];
+	} else {
+	  os<<setw(20)<<"";
+	}
       }
       os<<endl;
     }
