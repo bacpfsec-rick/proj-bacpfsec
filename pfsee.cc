@@ -15,7 +15,7 @@ using namespace std;
 /*
   Define some constant value by user's preference
  */
-#define maxTaskInProgress 5
+#define maxTaskInProgress 10
 
 /*
   Data structure
@@ -66,6 +66,7 @@ int main() {
   cout<<"----------------------"<<endl;
   cout<<"|  Welcome to Pfsee  |"<<endl;
   cout<<"----------------------"<<endl;
+  // initialize
   init();
   while (instruct()) {
     cout<<">>>"<<endl;
@@ -97,8 +98,7 @@ bool instruct() {
   cout<<(recordLoaded ? "(3-WORK NOW) " : "");
   cout<<(recordLoaded ? "(4-Timeline) " : "");
   cout<<(recordLoaded ? "(5-Save rec) " : "");
-  cout<<"(8-Quit) ";
-  cout<<endl<<">>> ";
+  cout<<"(8-Quit) "<<endl<<">>> ";
   cin>>i;
   // Menu without record
   if (!recordLoaded) {
@@ -133,6 +133,8 @@ bool instruct() {
       write_record(ofs,tasks);
       ofs.close();
       cout<<"   (Record is saved)"<<endl;
+      // re-initialize
+      init();
       break;
     }
   case '4':
