@@ -32,12 +32,13 @@ struct task {
   task(string n, vector<state> sts, bool f) : name(n), states(sts), finish(f) {}
   string name;
   vector<state> states;
-  bool finish;
+  int finish;
 };
 static bool recordLoaded;
 static int startDate;
 static int endDate;
 static int numOfTaskUncomplete;
+static int numOfTaskCancelled;
 static vector<task> tasks;
 
 /*
@@ -69,7 +70,7 @@ int main() {
   // initialize
   init();
   while (instruct()) {
-    cout<<">>>"<<endl;
+    cout<<">>> "<<endl;
   };
   return 0;
 }
@@ -141,7 +142,7 @@ bool instruct() {
     {
       int start,end;
       cout<<"   (Input Format)"<<endl;
-      cout<<"   (YYMMDD YYMMDD) --- eg. 150101 151231"<<endl<<">>>";
+      cout<<"   (YYMMDD YYMMDD) --- eg. 150101 151231"<<endl<<">>> ";
       cin>>start>>end;
       cout<<"   (Timeline from "<<start<<"~"<<end<<")"<<endl;
       ofstream ofs;
@@ -190,6 +191,9 @@ void read_states(ifstream& ifs, task& bk) {
     } else if ( s=="0" ) { // task in progress
       bk.finish = 0;
       ++numOfTaskUncomplete;
+    } else if ( s=="2" ) {
+      bk.finish = 2;
+      ++numOfTaskCancelled;
     } else {
       state newState;
       int date;
@@ -212,7 +216,7 @@ void read_states(ifstream& ifs, task& bk) {
 
 void show_record(ostream& os, vector<task>& tasks) {
   for(int i=0; i<tasks.size(); ++i) {
-    if (tasks[i].finish!=1) { // print only the tasks in progress
+    if (tasks[i].finish==1) { // print only the tasks in progress
       os<<"    Task name : "<<tasks[i].name<<endl;
       os<<"    Progress  : ";
       for(int j=0; j<tasks[i].states.size(); ++j) {
@@ -268,9 +272,9 @@ void timeline(ofstream& os, vector<task>& tasks, int start, int end) {
     os<<"   ***Nothing done in given period***"<<endl;
   } else {
     // print title
-    os<<left<<setw(20)<<"Date\\Task";
+    os<<left<<setw(15)<<"Date\\Task";
     for (int i=0; i<tasks.size(); ++i) {
-      os<<left<<setw(20)<<tasks[i].name;
+      os<<left<<setw(15)<<tasks[i].name;
     }
     os<<endl;
     // print date
@@ -279,16 +283,16 @@ void timeline(ofstream& os, vector<task>& tasks, int start, int end) {
       track[i]=0;
     }
     for(int i=start; i<=endDate; next_day(i)) {
-      print_day(os,i,20);
+      print_day(os,i,15);
       for(int j=0; j<tasks.size(); ++j) {
 	while( tasks[j].states[track[j]].date<i) { // trace to partial start
 	  ++track[j];
 	}
 	if (tasks[j].states[track[j]].date==i) {
-	  os<<left<<setw(20)<<tasks[j].states[track[j]].content;
+	  os<<left<<setw(15)<<tasks[j].states[track[j]].content;
 	  ++track[j];
 	} else {
-	  os<<setw(20)<<"";
+	  os<<setw(15)<<"";
 	}
       }
       os<<endl;
@@ -301,7 +305,8 @@ void brief_report(ostream& os, vector<task>& tasks) {
   os<<"   Last date of updating data  : "<<endDate<<endl;
   os<<"   Number of tasks in progress : "<<numOfTaskUncomplete<<endl;
   os<<"   Number of tasks completed   : "<<
-    (tasks.size()-numOfTaskUncomplete)<<endl;
+    (tasks.size()-numOfTaskUncomplete-numOfTaskCancelled)<<endl;
+  os<<"   Number of tasks cancalled   : "<<numOfTaskCancelled<<endl;
 }
 
 void next_day(int& today) {
@@ -364,7 +369,7 @@ void select_action(ostream& os, istream& is, vector<task>& tasks) {
     ((numOfTaskUncomplete < maxTaskInProgress) ? 
      "(2-Start new work)" : "")<<endl;
   int choice;
-  os<<">>>";
+  os<<">>> ";
   is>>choice;
   if (choice==0) {
     return;
@@ -376,14 +381,14 @@ void select_action(ostream& os, istream& is, vector<task>& tasks) {
       os<<"   (Select an work)"<<endl;
       int choice = select_task(os,is,tasks);
       os<<"   (Work on "<<tasks[choice].name<<")"<<endl;
-     int redo=0;
-     working(os,is,tasks[choice],redo);
+      int redo=0;
+      working(os,is,tasks[choice],redo);
     }
   } else if (choice==2) {
     if (numOfTaskUncomplete < maxTaskInProgress) {
       task newTask;
       os<<"   (Name Format)"<<endl;
-      os<<"   (Less than 10 char) --- eg. Sample_task1"<<endl<<">>>";
+      os<<"   (Less than 10 char) --- eg. Sample_task1"<<endl<<">>> ";
       string name;
       is>>name;
       newTask.name = name;
@@ -404,22 +409,21 @@ void select_action(ostream& os, istream& is, vector<task>& tasks) {
 }
 
 int select_task(ostream& os, istream& is, vector<task>& tasks) {
-
   os<<"   (0-Random)";
   for(int i=0; i<tasks.size(); ++i) {
     if(tasks[i].finish==0) {
       os<<" ("<<i+1<<"-"<<tasks[i].name<<")";
     }
   }
-  os<<endl<<">>>";
+  os<<endl<<">>> ";
   int choice;
   is>>choice;
   if (choice==0) {
     do {
       choice = rand()%tasks.size();
-    } while (tasks[choice].finish==1);
+    } while (tasks[choice].finish!=0);
     return choice;
-  } else if (choice> numOfTaskUncomplete) {
+  } else if (choice> tasks.size() || tasks[choice-1].finish!=0) {
     os<<"   ***Invalid choice***"<<endl;
     select_task(os,is,tasks);
   }
@@ -427,8 +431,8 @@ int select_task(ostream& os, istream& is, vector<task>& tasks) {
 }
 
 void working(ostream& os, istream& is, task& task, int& redo) {
-  os<<"   (0-Back) (1-Finish it) (2-Update a new progress)"
-    <<((redo>0) ? " (3-Redo an update) " : "")<<endl<<">>>";
+  os<<"   (0-Back) (1-Finish it) (2-Cancel it) (3-Update a new progress)"
+    <<((redo>0) ? " (4-Redo an update) " : "")<<endl<<">>> ";
   int choice;
   is>>choice;
   if (choice==0) {
@@ -437,9 +441,13 @@ void working(ostream& os, istream& is, task& task, int& redo) {
     task.finish = 1;
     --numOfTaskUncomplete;
   } else if (choice==2) {
+    task.finish = 2;
+    --numOfTaskUncomplete;
+    ++numOfTaskCancelled;
+  } else if (choice==3) {
     os<<"   (Progress Format)"<<endl;
     os<<"   (Detail in 20 chars / Date is auto recorded) "<<
-      "--- eg. Chap2 "<<endl<<">>>";
+      "--- eg. Chap2 "<<endl<<">>> ";
     string content;
     is>>content;
     state newState;
@@ -454,7 +462,7 @@ void working(ostream& os, istream& is, task& task, int& redo) {
     task.states.push_back(newState);
     os<<"   (Record updated)"<<endl;
     working(os,is,task,redo);
-  } else if (choice==3) {
+  } else if (choice==4) {
     if (redo>0) {
       task.states.pop_back();
       --redo;
