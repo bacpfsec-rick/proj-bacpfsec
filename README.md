@@ -57,4 +57,9 @@ V1.2	    150311      Add option of cancelling task and debug for select_task
 			brief_report(ostream& os, vector<task>& tasks);
 			select_task(ostream& os,istream& is, 
 					     vector<task>& tasks);
+V1.2.1	    150314      Improve the record of FINISH or CANCEL by marking
+	    MODIFY	working(ostream& os, istream& is, 
+					     task& task, int& redo);
+            RENAME      Pfsee -> Apfsec
+	    		Accelerated Parallel Full Stack Engineering Creator
 V1.3	    ***		Implement the data encryption

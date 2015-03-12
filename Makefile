@@ -1,9 +1,9 @@
 CC=g++ -std=c++11
 CFLAGS=-c -Wall
 LDFLAGS=
-SOURCES=pfsee.cc
+SOURCES=apfsec.cc
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=Pfsee
+EXECUTABLE=Apfsec
 LIBS = 
 
 all: $(SOURCES) $(EXECUTABLE)
