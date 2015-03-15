@@ -1,5 +1,6 @@
 /*
-  Project : Accelerated Parallel Full Stack Engineering Creator
+  Project : Balanced Accelerated Creative Parallel 
+            Full Stack Engineering Creator
   Author  : Rick Liu
  */
 #include <stdio.h>
