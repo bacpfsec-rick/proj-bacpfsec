@@ -62,4 +62,8 @@ V1.2.1	    150314      Improve the record of FINISH or CANCEL by marking
 					     task& task, int& redo);
             RENAME      Pfsee -> Apfsec
 	    		Accelerated Parallel Full Stack Engineering Creator
+V1.2.2      150316	Rename into the finalized ideal one
+	    RENAME	Apfsec -> Bacpfsec
+	    		Balanced Accelerated Creative Parallel
+			Full Stack Engineering Conqueror
 V1.3	    ***		Implement the data encryption
