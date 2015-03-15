@@ -1,5 +1,7 @@
 Project     : 
-	    Pfsee (Parallel Full Stack Engineering Executive)
+	    Bacpfsec
+	    (Balanced Accelerated Parallel Creative
+	    	      Full Stack Engineering Conquerer)
 Description :
 	    Back to August, 2014, an idea of making a personal multi-project 
 	    management software flash into my mind.
