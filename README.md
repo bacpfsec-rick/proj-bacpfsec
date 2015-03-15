@@ -1,7 +1,7 @@
 Project     : 
-	    Bacpfsec
-	    (Balanced Accelerated Parallel Creative
-	    	      Full Stack Engineering Conquerer)
+	    Bacpsec
+     (Balanced Accelerated Creative Parallel Stack Engineering Conquerer)
+
 Description :
 	    Back to August, 2014, an idea of making a personal multi-project 
 	    management software flash into my mind.
