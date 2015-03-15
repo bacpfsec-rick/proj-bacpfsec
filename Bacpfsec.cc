@@ -217,7 +217,7 @@ void read_states(ifstream& ifs, task& bk) {
 
 void show_record(ostream& os, vector<task>& tasks) {
   for(int i=0; i<tasks.size(); ++i) {
-    if (tasks[i].finish==1) { // print only the tasks in progress
+    if (tasks[i].finish==0) { // print only the tasks in progress
       os<<"    Task name : "<<tasks[i].name<<endl;
       os<<"    Progress  : ";
       for(int j=0; j<tasks[i].states.size(); ++j) {
@@ -286,6 +286,10 @@ void timeline(ofstream& os, vector<task>& tasks, int start, int end) {
     for(int i=start; i<=endDate; next_day(i)) {
       print_day(os,i,15);
       for(int j=0; j<tasks.size(); ++j) {
+	if (tasks[j].states[tasks[j].states.size()-1].date<i) {
+	  os<<setw(15)<<"";
+	  continue;
+	}
 	while( tasks[j].states[track[j]].date<i) { // trace to partial start
 	  ++track[j];
 	}

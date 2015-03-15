@@ -25,7 +25,7 @@ Date\Task      ItA            DataStr        CFAL1          AIaMA          Bacpf
 15-2-24                                                                                                  ~P110                                                                      
 15-2-25                                                                                                                 ~P9                                                         
 15-2-26                                                                                                                                                                             
-15-2-27                                                                                                                 CANCEL                                                      
+15-2-27                                                                                                                                                                             
 15-2-28                                                                                                                                                                             
 15-3-1                                                                                                                                                                              
 15-3-2                                                                                                                                                                              
@@ -38,8 +38,8 @@ Date\Task      ItA            DataStr        CFAL1          AIaMA          Bacpf
 15-3-9                                                                                                                                                                              
 15-3-10                                                                                                  P150~181                                                                   
 15-3-11                                                                    V1.2                          P121~149                      Basic2/2                                     
-15-3-12                                                                                                  ~P247                         Basic2                                       
+15-3-12                                                                                                  ~P247          CANCEL         Basic2                                       
 15-3-13                                                                                                                                                                             
-15-3-14                       ~V34                                         V1.2.1                        ~P277          ~V34                                                        
-15-3-15                       ~V36                                                                                      ~V36                                                        
-15-3-16                       ~V37                                         V1.2.2                                       ~V37                                                        
+15-3-14                       ~V34                                         V1.2.1                        ~P277                                                                      
+15-3-15                       ~V36                                                                                                     Basic2Rev                                    
+15-3-16                       ~V37                                         V1.2.2                                                                                                   

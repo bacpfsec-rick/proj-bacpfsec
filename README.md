@@ -62,7 +62,10 @@ V1.2.1	    150314      Improve the record of FINISH or CANCEL by marking
 					     task& task, int& redo);
             RENAME      Pfsee -> Apfsec
 	    		Accelerated Parallel Full Stack Engineering Creator
-V1.2.2      150316	Rename into the finalized ideal one
+V1.2.2      150316	Debug and rename the program
+	    DEBUG	timeline(ofstream& os, vector<task>& tasks,
+					     int start, int end);
+
 	    RENAME	Apfsec -> Bacpfsec
 	    		Balanced Accelerated Creative Parallel
 			Full Stack Engineering Conqueror
