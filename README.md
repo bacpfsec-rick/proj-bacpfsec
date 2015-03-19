@@ -70,8 +70,6 @@ V1.2.2      150316	Debug and rename the program
 
 	    RENAME	Apfsec -> Bacpfsec
 	    		Balanced Accelerated Creative Parallel
-			Full Stack Engineering Conqueror
-V1.2.3      150316      Name change due to personal website
-	    RENAME	Bacpfsec -> Bacpsec
-     (Balanced Accelerated Creative Parallel Stack Engineering Conqueror)
+1			Full Stack Engineering Conqueror
+V1.2.3      150316      Slight modification
 V1.3	    ***		Implement the data encryption
