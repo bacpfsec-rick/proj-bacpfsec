@@ -12,7 +12,10 @@ Date::Date() {
 }
 
 Date::Date(int d) : date(d) {
-
+  /** set back to default for invalid date */
+  if (!isValid()) {
+    date = 20150301;
+  }
 }
 
 Date::~Date() {
@@ -21,6 +24,9 @@ Date::~Date() {
 
 void Date::setDate(int d) {
   date = d;
+  if (!isValid()) {
+    date = 20150301;
+  }
 }
 
 int Date::getDate() {
@@ -79,4 +85,38 @@ void Date::nextDate() {
   }
   ++beforeNextDate;
   date = beforeNextDate;
+}
+
+bool Date::isValid() {
+  if (date<19700101 || date>20991231) {
+    return false;
+  }
+  int year = date/10000, mon = date/100%100, day = date%100;
+  switch(mon) { 
+  case 1 :case 3 :case 5 :case 7 :case 8 :case 10: case 12:
+    {
+      if (day<=31) {
+	return true;
+      }
+    break;
+    }
+  case 4 :case 6 :case 9 :case 11 :
+    {
+      if (day<=30) {
+	return true;
+      }
+      break;
+    }
+  case 2:
+    {
+      if (day<=28) {
+	return true;
+      } else if (day==29) {
+	if((year%400==0) || ((year%4==0)&&(year%100!=0))) { 
+	  return true;
+	} 
+      }
+      break;    
+    }
+    return false;
 }

@@ -87,6 +87,23 @@ class FixtureDate : public CppUnit::TestFixture {
     dt->nextDate();
     CPPUNIT_ASSERT(20151216 == dt->getDate());
   }
+
+  /**    Test for Date::nextDate(int)
+   *
+   *     Test case 1: 20150229(invalid)->20150301
+   *
+   *     Test case 2: 20160229(valid)->20160229
+   *
+   *     Test case 3: 20151930(invalid)->20150301
+   */ 
+  void testIsValid() {
+    dt->setDate(20150229);
+    CPPUNIT_ASSERT(20150301 == dt->getDate());
+    dt->setDate(20160229);
+    CPPUNIT_ASSERT(20160229 == dt->getDate());
+    dt->setDate(20151930);
+    CPPUNIT_ASSERT(20150301 == dt->getDate());
+   }
 };
 
 #endif
