@@ -13,7 +13,7 @@ State::State() : content(""), date(Date()) {
 
 }
 
-State::State(string s, const Date& dt) : content(s), date(dt) {
+State::State(std::string s, const Date& dt) : content(s), date(dt) {
 
 }
 
@@ -37,13 +37,13 @@ Date State::getDate() {
   /**    Setter for content
    *     @param s    A string for progress detail
    */ 
-void State::setContent(string s) {
+void State::setContent(std::string s) {
   content = s;
 }
 
   /**    Getter for content
    *     @return      A string with details from private content
    */ 
-string State::getContent() {
+std::string State::getContent() {
   return content;
 }

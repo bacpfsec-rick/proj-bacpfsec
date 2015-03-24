@@ -31,7 +31,7 @@ public:
    *     @param s    string content for a progress
    *     @param dt   a Date object
    */ 
-  State(string s, const Date& dt);
+  State(std::string s, const Date& dt);
 
   /**    Copy constructor
    *     
@@ -56,17 +56,17 @@ public:
   /**    Setter for content
    *     @param s    A string for progress detail
    */ 
-  void setContent(string s);
+  void setContent(std::string s);
 
   /**    Getter for content
    *     @return      A string with details from private content
    */ 
-  string getContent();
+  std::string getContent();
 
 
 private:
   /** Storage of progress detail */ 
-  string content;
+  std::string content;
 
   /** Storage of date value */ 
   Date date;
