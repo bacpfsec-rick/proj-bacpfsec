@@ -54,9 +54,10 @@ private:
   /** Storage of date value */ 
   int date;
 
-  /**    Check if a date is valid
+  /**    Date check
    *
-   */ 
+   *     Private helper to test if a date is valid 
+   */
   bool isValid();
 };
 #endif

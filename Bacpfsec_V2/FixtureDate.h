@@ -47,7 +47,7 @@ class FixtureDate : public CppUnit::TestFixture {
     CPPUNIT_ASSERT(20150301 == dt->getDate());
   }
 
-  /**    Test for Date::setDate(int)
+  /**    Test for Date::setDate(int d)
    *     
    */ 
   void testSetter() {
@@ -55,7 +55,7 @@ class FixtureDate : public CppUnit::TestFixture {
     CPPUNIT_ASSERT(20150322 == dt->getDate());
   }
 
-  /**    Test for Date::Date(int)
+  /**    Test for Date::Date(int d)
    *     
    */ 
   void testParaConstructor() {
@@ -64,7 +64,7 @@ class FixtureDate : public CppUnit::TestFixture {
     CPPUNIT_ASSERT(20150427 == dt->getDate());
   }
 
-  /**    Test for Date::nextDate(int)
+  /**    Test for Date::nextDate()
    *
    *     Test case 1: 20150228->20150301
    *
@@ -89,7 +89,7 @@ class FixtureDate : public CppUnit::TestFixture {
     CPPUNIT_ASSERT(20151216 == dt->getDate());
   }
 
-  /**    Test for Date::nextDate(int)
+  /**    Test for Date::isValid()
    *
    *     Test case 1: 20150229(invalid)->20150301
    *
