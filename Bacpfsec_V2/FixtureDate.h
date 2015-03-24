@@ -23,6 +23,7 @@ class FixtureDate : public CppUnit::TestFixture {
   CPPUNIT_TEST(testGetter);
   CPPUNIT_TEST(testSetter);
   CPPUNIT_TEST(testParaConstructor);
+  CPPUNIT_TEST(testCopyConstructor);
   CPPUNIT_TEST(testNextDate);
   CPPUNIT_TEST(testIsValid);
   CPPUNIT_TEST_SUITE_END();
@@ -62,6 +63,15 @@ class FixtureDate : public CppUnit::TestFixture {
     delete dt;
     dt = new Date(20150427);
     CPPUNIT_ASSERT(20150427 == dt->getDate());
+  }
+
+  /**    Test for Date::Date(const Date& dt)
+   *     
+   */ 
+  void testCopyConstructor() {
+    dt->setDate(20150427);
+    Date cpDate(*dt);
+    CPPUNIT_ASSERT(20150427 == cpDate.getDate());
   }
 
   /**    Test for Date::nextDate()

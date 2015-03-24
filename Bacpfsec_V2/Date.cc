@@ -18,6 +18,10 @@ Date::Date(int d) : date(d) {
   }
 }
 
+Date::Date(const Date& dt) {
+  date = dt.date;
+}
+
 Date::~Date() {
 
 }

@@ -11,8 +11,13 @@ V2.1.1:Test Date Class	6367377	Test the simple Date class with CppUnitFixture
 				ISSUE: whether a date from input is valid
 				ADD	FixtureDate.h
 					TestDate.cc
-v2.1.2:I&T Date Class	763df79	Implement and test the isValid check of Date Class
+v2.1.2:I&T Date Class	7e9c7ce	Implement and test the isValid check of Date Class
 				Modify	Date.h
 					Date.cc
 					FixtureDate.h
+v2.1.3:I&T Date Class	7e9c7ce	Supply copy constructor to Date Class
+				Modify	Date.h
+					Date.cc
+					FixtureDate.h
+
 

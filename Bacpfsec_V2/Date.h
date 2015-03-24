@@ -30,6 +30,11 @@ public:
    */ 
   Date(int d);
 
+  /**    Copy constructor
+   *     
+   */ 
+  Date(const Date& dt);
+
   /**    Destructor
    *
    */ 
