@@ -24,6 +24,7 @@ class FixtureDate : public CppUnit::TestFixture {
   CPPUNIT_TEST(testSetter);
   CPPUNIT_TEST(testParaConstructor);
   CPPUNIT_TEST(testNextDate);
+  CPPUNIT_TEST(testIsValid);
   CPPUNIT_TEST_SUITE_END();
 
  private:
