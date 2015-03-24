@@ -1,7 +1,0 @@
-*****                           Version Control                      *****
-Version                  Index     Description
-V2.0:Setting up	         d014f57   Setting up Makefile & README for Bacpfsec
-	     	                   ADD      Makefile
-			      	            README.md
-				            bfc.config
-V2.1.0:Impl. Date Class  

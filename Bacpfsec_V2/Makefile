@@ -1,13 +1,14 @@
 CFLAGS = -I /home/lib2720/allegro5/include/
 LIBDIR = /home/lib2720/allegro5/lib/
-LNFLAGS = -lallegro -lallegro_primitives
-OBJECTS1 = test1.o
-OBJECTS2 = test2.o
+LNFLAGS = -lallegro -lallegro_primitives -lcppunit -ldl
+OBJECTS1 = Date.o TestDate.o
+#OBJECTS2 = test2.o
 
-all:   test1 test2
+#all:   test1 test2
 
-test1: $(OBJECTS1)
-	g++ -std=c++0x -L $(LIBDIR) -o $@ $^ $(LNFLAGS) 
+TestDate: $(OBJECTS1)
+	g++ -std=c++0x -L $(LIBDIR) -o $@ $^ $(LNFLAGS)
+	rm -rf *o *~
 
 test2: $(OBJECTS2)
 	g++ -std=c++0x -L $(LIBDIR) -o $@ $^ $(LNFLAGS) 
@@ -17,3 +18,4 @@ test2: $(OBJECTS2)
 
 clean:
 	rm -rf *o *~
+	rm TestDate
