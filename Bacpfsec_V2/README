@@ -4,20 +4,23 @@ V2.0:Setting up	        d014f57	Setting up Makefile & README for Bacpfsec
 				ADD	Makefile
 			      	        README.md
 				        bfc.config
-V2.1.0:Impl Date Class	adffb3e Implement the very-first Date Class
+V2.1.0:Impl Date Class	adffb3e Implement the basic Date Class
 				ADD	Date.h
 					Date.cc
 V2.1.1:Test Date Class	6367377	Test the simple Date class with CppUnitFixture
 				ISSUE: whether a date from input is valid
 				ADD	FixtureDate.h
 					TestDate.cc
-v2.1.2:I&T Date Class	7e9c7ce	Implement and test the isValid check of Date Class
+v2.1.2:I&T Date Class	7e9c7ce	Implement and test func. isValid of Date Class
 				Modify	Date.h
 					Date.cc
 					FixtureDate.h
-v2.1.3:I&T Date Class	7e9c7ce	Supply copy constructor to Date Class
+v2.1.3:I&T Date Class	03cc828	Supply copy constructor to Date Class
 				Modify	Date.h
 					Date.cc
 					FixtureDate.h
+V3.1.0:Impl Date Class		Implement the basic Date Class
+				ADD	State.h
+					State.cc
 
 
