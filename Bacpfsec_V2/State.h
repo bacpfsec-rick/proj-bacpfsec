@@ -63,6 +63,11 @@ public:
    */ 
   std::string getContent();
 
+  /**    Merge another content to this state
+   *     @param s    A string for another progress detail
+   */ 
+  void merge(std::string s);
+
 
 private:
   /** Storage of progress detail */ 

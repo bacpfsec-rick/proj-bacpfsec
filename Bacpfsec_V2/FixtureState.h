@@ -26,6 +26,7 @@ class FixtureState : public CppUnit::TestFixture {
   CPPUNIT_TEST(testContentSetter);
   CPPUNIT_TEST(testParaConstructor);
   CPPUNIT_TEST(testCopyConstructor);
+  CPPUNIT_TEST(testContentMerge);
   CPPUNIT_TEST_SUITE_END();
 
  private:
@@ -89,6 +90,15 @@ class FixtureState : public CppUnit::TestFixture {
     st = new State(State("Test content 4",Date(20221122)));
     CPPUNIT_ASSERT("Test content 4" == st->getContent());
     CPPUNIT_ASSERT(20221122 == (st->getDate()).getDate());
+  }
+
+  /**    Test for State::merge(std::string s)
+   *
+   */ 
+  void testContentMerge() {
+    st->setContent("Part 1");
+    st->merge("Part 2");
+    CPPUNIT_ASSERT("Part 1 + Part 2" == st->getContent());
   }
 };
 

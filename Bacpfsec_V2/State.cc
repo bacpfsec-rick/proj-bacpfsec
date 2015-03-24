@@ -34,16 +34,14 @@ Date State::getDate() {
   return date;
 }
 
-  /**    Setter for content
-   *     @param s    A string for progress detail
-   */ 
 void State::setContent(std::string s) {
   content = s;
 }
 
-  /**    Getter for content
-   *     @return      A string with details from private content
-   */ 
 std::string State::getContent() {
   return content;
+}
+
+void State::merge(std::string s) {
+  content += (" + " + s);
 }

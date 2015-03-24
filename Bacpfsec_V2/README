@@ -21,11 +21,17 @@ v2.1.3:I&T Date Class	03cc828	Supply copy constructor to Date Class and test it
 				Modify	Date.h
 					Date.cc
 					FixtureDate.h
-V3.1.0:Impl Date Class	940f7b0	Implement the basic Date Class
+V3.1.0:Impl State Class	940f7b0	Implement the basic Date Class
 				ADD	State.h
 					State.cc
-V2.1.1:Test Date Class		Test the baisc Date class with CppUnitFixture
-				ISSUE: 
+V3.1.1:Test State Class	e497a99	Test the baisc Date class with CppUnitFixture
+				ISSUE:	Only one State content allows for each day
 				ADD	FixtureState.h
 					TestState.cc
+v3.1.2:I&T State Class		Supply func. merge to state class
+				ISSUE:	A variant to merge is needed
+					State should be merged based on state date
+				Modify	State.h
+					State.cc
+					FixtureDate.h
 
