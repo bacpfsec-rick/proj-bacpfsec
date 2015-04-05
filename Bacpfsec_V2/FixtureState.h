@@ -7,8 +7,8 @@
  * FixtureSate is used in TestSate for State Class
  */
 
-#ifndef FIXTURESTATE_H
-#define FIXTURESTATE_H
+#ifndef _FIXTURESTATE_H_
+#define _FIXTURESTATE_H_
 
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>

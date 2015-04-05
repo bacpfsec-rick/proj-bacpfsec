@@ -11,7 +11,7 @@
 Task::Task() :
   taskName("Empty Task"), status(0) {}
 
-Task::Task(std::string tn, const std::vector<State>& st, bool s) :
+Task::Task(std::string tn, const std::vector<State>& st, int s) :
   taskName(tn), states(st), status(s) {}
 
 Task::Task(const Task& t) :

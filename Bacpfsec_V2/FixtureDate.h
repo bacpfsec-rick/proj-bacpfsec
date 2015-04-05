@@ -7,8 +7,8 @@
  * FixtureDate is used in TestDate for Date Class
  */
 
-#ifndef FIXTUREDATE_H
-#define FIXTUREDATE_H
+#ifndef _FIXTUREDATE_H_
+#define _FIXTUREDATE_H_
 
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>

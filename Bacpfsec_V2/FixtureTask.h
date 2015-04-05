@@ -7,8 +7,8 @@
  * FixtureTask is used in TestDate for Task Class
  */
 
-#ifndef FIXTURETASK_H
-#define FIXTURETASK_H
+#ifndef _FIXTURETASK_H_
+#define _FIXTURETASK_H_
 
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>

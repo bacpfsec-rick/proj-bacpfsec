@@ -30,10 +30,11 @@ public:
   Task();
 
   /**    Parameterized constructor
-   *     @param s    string content for a progress
-   *     @param dt   a Date object
+   *     @param tn    string content for a task name
+   *     @param st    a vector of states
+   *     @param s     a boolean to indicate the task status
    */ 
-  Task(std::string tn, const std::vector<State>& st, bool s);
+  Task(std::string tn, const std::vector<State>& st, int s);
 
   /**    Copy constructor
    *     
