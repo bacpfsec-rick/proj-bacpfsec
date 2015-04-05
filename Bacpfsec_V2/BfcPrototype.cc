@@ -70,3 +70,34 @@ void BfcPrototype::init() {
     tasks.clear();
   }
 }
+
+void BfcPrototype::readStates(std::istream& is, Task& bk) {
+  std::string s;
+  if (is>>s) {
+    if ( s=="1" ) {          // task completed
+      bk.setStatus(1);
+    } else if ( s=="0" ) {   // task in progress
+      bk.setStatus(0);
+      ++numOfTaskUncomplete;
+    } else if ( s=="2" ) {   // task cancelled
+      bk.setStatus(2);
+      ++numOfTaskCancelled;
+    } else {
+      State newState;
+      int date;
+      newState.setContent(s);
+      is>>date;
+      // set up the start date and end date
+      if ( startDate.getValue() > date ) {
+	startDate.setValue(date);
+      }
+      if ( endDate.getValue() < date ) {
+	endDate.setValue(date);
+      }
+      newState.setDate(Date(date));
+      bk.getStates().push_back(newState);
+      // recursively read next state
+      readStates(is,bk);
+    }
+  }
+};

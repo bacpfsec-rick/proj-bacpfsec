@@ -17,6 +17,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include "BfcPrototype.h"
 #include <vector>
+#include <iostream>
 
 class FixtureBfcPrototype : public CppUnit::TestFixture {
  public:
@@ -24,6 +25,7 @@ class FixtureBfcPrototype : public CppUnit::TestFixture {
   CPPUNIT_TEST(testInitAndGetters);
   CPPUNIT_TEST(testSetters);
   CPPUNIT_TEST(testTasksGetter);
+  CPPUNIT_TEST(testReadStates);
   CPPUNIT_TEST_SUITE_END();
 
  private:
@@ -90,6 +92,20 @@ class FixtureBfcPrototype : public CppUnit::TestFixture {
     CPPUNIT_ASSERT(ref[0].getStatus() == 2);
     CPPUNIT_ASSERT((ref[0].getStates())[0].getContent() == "Today");
     CPPUNIT_ASSERT((ref[0].getStates())[0].getDate() == Date(20150405));
+  }
+
+  /**    Test for BfcPrototype::readStates(istream, Task&)
+   *
+   */ 
+  void testReadStates() {
+    Task t("New",std::vector<State>(),2);
+    bfc->readStates(std::cin,t); // Input "~P2 20150302 ~P3 20150304 1" to test
+    std::vector<State>& ref = t.getStates();
+    CPPUNIT_ASSERT(ref[0].getDate() == Date(20150302));
+    CPPUNIT_ASSERT(ref[0].getContent() == "~P2");
+    CPPUNIT_ASSERT(ref[1].getDate() == Date(20150304));
+    CPPUNIT_ASSERT(ref[1].getContent() == "~P3");
+    CPPUNIT_ASSERT(t.getStatus() == 1);
   }
 
 };

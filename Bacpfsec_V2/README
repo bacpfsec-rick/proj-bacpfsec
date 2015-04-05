@@ -54,8 +54,13 @@ V3.3.0:Impl Task Class	   	98a0802		Implement the basic Task Class
 V3.3.1:Test Task Class		41145e8		Test the baisc Task class with CppUnitFixture    	 				
 	    	 				ADD	FixtureTask.h
 							TestTask.cc
-V4.4.1:I&T BfcPrototype				Implement the prototype with basic setters and getters
+V4.4.1:I&T BfcPrototype		a97fdd2		Provide the prototype with basic setters and getters
 	    					ADD	BfcPrototype.h
 							BfcPrototype.cc
 	    	 					FixtureBfcPrototype.h
 							TestBfcPrototype.cc
+V4.4.2:I&T BfcPrototype				Impl&Test readState function
+	   	 				Modify	BfcPrototype.h
+							BfcPrototype.cc
+							FixtureBfcPrototype.h
+

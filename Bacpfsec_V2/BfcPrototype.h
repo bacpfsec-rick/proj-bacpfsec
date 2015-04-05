@@ -89,6 +89,12 @@ public:
   std::vector<Task>& getTasks();
 
 
+  /**    Virtual readStates()
+   *
+   *     Get the record from stream and update the task and private members
+   */
+  virtual void readStates(std::istream& is, Task& bk);
+
 private:
   /** Const limit of tasks in progress */
   const int maxTaskInProgress = 15;
