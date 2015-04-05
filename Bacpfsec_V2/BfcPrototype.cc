@@ -82,10 +82,16 @@ void BfcPrototype::readStates(std::istream& is, Task& bk) {
     } else if ( s=="2" ) {   // task cancelled
       bk.setStatus(2);
       ++numOfTaskCancelled;
-    } else {
+    } else {                 // s=="["
+      is>>s;
+      std::string content = "";
+      while( s!="]" ) {
+	content += (s+" ");
+	is>>s;
+      }
       State newState;
       int date;
-      newState.setContent(s);
+      newState.setContent(content);
       is>>date;
       // set up the start date and end date
       if ( startDate.getValue() > date ) {
