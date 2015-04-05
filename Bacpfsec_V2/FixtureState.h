@@ -46,14 +46,14 @@ class FixtureState : public CppUnit::TestFixture {
    */ 
   void testDateSetter() {
     st->setDate(Date(20150322));
-    CPPUNIT_ASSERT(20150322 == (st->getDate()).getDate());
+    CPPUNIT_ASSERT(20150322 == (st->getDate()).getValue());
   }
 
   /**    Test for State::getDate()
    *
    */ 
   void testDateGetter() {
-    CPPUNIT_ASSERT(20150301 == (st->getDate()).getDate());
+    CPPUNIT_ASSERT(20150301 == (st->getDate()).getValue());
   }
 
    /**    Test for State::setContent(std::string s)
@@ -78,7 +78,7 @@ class FixtureState : public CppUnit::TestFixture {
   void testParaConstructor() {
     delete st;
     st = new State("Test content 3",Date(20111111));
-    CPPUNIT_ASSERT(20111111 == (st->getDate()).getDate());
+    CPPUNIT_ASSERT(20111111 == (st->getDate()).getValue());
     CPPUNIT_ASSERT("Test content 3" == st->getContent());
   }
 
@@ -89,7 +89,7 @@ class FixtureState : public CppUnit::TestFixture {
     delete st;
     st = new State(State("Test content 4",Date(20221122)));
     CPPUNIT_ASSERT("Test content 4" == st->getContent());
-    CPPUNIT_ASSERT(20221122 == (st->getDate()).getDate());
+    CPPUNIT_ASSERT(20221122 == (st->getDate()).getValue());
   }
 
   /**    Test for State::merge(std::string s)

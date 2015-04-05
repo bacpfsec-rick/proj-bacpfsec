@@ -43,12 +43,12 @@ public:
   /**    Setter
    *     @param d    Value stands for a date
    */ 
-  void setDate(int d);
+  void setValue(int d);
 
   /**    Getter
    *     @return     Value of the private date
    */ 
-  int getDate();
+  int getValue();
 
   /**    Proceed date to next valid date
    *

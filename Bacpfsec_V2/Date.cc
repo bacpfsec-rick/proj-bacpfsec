@@ -26,14 +26,14 @@ Date::~Date() {
 
 }
 
-void Date::setDate(int d) {
+void Date::setValue(int d) {
   date = d;
   if (!isValid()) {
     date = 20150301;
   }
 }
 
-int Date::getDate() {
+int Date::getValue() {
   return date;
 }
 

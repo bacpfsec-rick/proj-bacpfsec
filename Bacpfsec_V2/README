@@ -1,37 +1,44 @@
-*****                           Version Control                      *****
-Version                 Index	Description
-V2.0:Setting up	        d014f57	Setting up Makefile & README for Bacpfsec
-				ADD	Makefile
-			      	        README.md
-				        bfc.config
-V2.1.0:Impl Date Class	adffb3e Implement the basic Date Class
-				ADD	Date.h
-					Date.cc
-V2.1.1:Test Date Class	6367377	Test the basic Date class with CppUnitFixture
-				ISSUE: whether a date from input is valid
-				ADD	FixtureDate.h
-					TestDate.cc
-v2.1.2:I&T Date Class	7e9c7ce	Supply func. isValid to Date Class and test it
-				ISSUE: copy consturctor is missing
-				Modify	Date.h
-					Date.cc
-					FixtureDate.h
-v2.1.3:I&T Date Class	03cc828	Supply copy constructor to Date Class and test it
-				ISSUE: Date Class is provisionally completed
-				Modify	Date.h
-					Date.cc
-					FixtureDate.h
-V3.1.0:Impl State Class	940f7b0	Implement the basic Date Class
-				ADD	State.h
-					State.cc
-V3.1.1:Test State Class	e497a99	Test the baisc Date class with CppUnitFixture
-				ISSUE:	Only one State content allows for each day
-				ADD	FixtureState.h
-					TestState.cc
-v3.1.2:I&T State Class		Supply func. merge to state class
-				ISSUE:	A variant to merge is needed
-					State should be merged based on state date
-				Modify	State.h
-					State.cc
-					FixtureDate.h
+*****				Version Control                      *****
+Version          		Index		Description
+V2.0.0:Setting up	        d014f57		Setting up Makefile & README for Bacpfsec
+				       		ADD	Makefile
+			      	        		README.md
+				        		bfc.config
+V2.1.0:Impl Date Class		adffb3e 	Implement the basic Date Class
+				       		ADD	Date.h
+							Date.cc
+V2.1.1:Test Date Class		6367377		Test the basic Date class with CppUnitFixture
+				       		ISSUE: whether a date from input is valid
+				       		ADD	FixtureDate.h
+							TestDate.cc
+v2.1.2:I&T Date Class		7e9c7ce		Supply func. isValid to Date Class and test it
+				       		ISSUE: copy consturctor is missing
+				      		Modify	Date.h
+							Date.cc
+							FixtureDate.h
+v2.1.3:I&T Date Class		03cc828		Supply copy constructor to Date Class and test it
+						ISSUE: Date Class is provisionally completed
+				       		Modify	Date.h
+							Date.cc
+							FixtureDate.h
+V2.2.0:Impl State Class		940f7b0		Implement the basic Date Class
+						ADD	State.h
+							State.cc
+V2.2.1:Test State Class		e497a99		Test the baisc Date class with CppUnitFixture
+				       		ISSUE:	Only one State content allows for each day
+						ADD	FixtureState.h
+							TestState.cc
+v2.2.2:I&T State Class		0d04632		Supply func. merge to state class
+				       		ISSUE:	getDate() in State and Date is confusing
+						Modify	State.h
+							State.cc
+							FixtureState.h
+V2.2.3:Rename Date Class			Rename members in Date to avoid confusion
+	      	   				ISSUE:	A variant to merge is needed
+							State should be merged based on state date
+	      	   				Modify	Date.h
+							Date.cc
+							FixtureDate.h
+							FixtureState.h
+
 

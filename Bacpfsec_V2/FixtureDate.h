@@ -45,15 +45,15 @@ class FixtureDate : public CppUnit::TestFixture {
    *     Default date is 20150301
    */ 
   void testGetter() {
-    CPPUNIT_ASSERT(20150301 == dt->getDate());
+    CPPUNIT_ASSERT(20150301 == dt->getValue());
   }
 
   /**    Test for Date::setDate(int d)
    *     
    */ 
   void testSetter() {
-    dt->setDate(20150322);
-    CPPUNIT_ASSERT(20150322 == dt->getDate());
+    dt->setValue(20150322);
+    CPPUNIT_ASSERT(20150322 == dt->getValue());
   }
 
   /**    Test for Date::Date(int d)
@@ -62,16 +62,16 @@ class FixtureDate : public CppUnit::TestFixture {
   void testParaConstructor() {
     delete dt;
     dt = new Date(20150427);
-    CPPUNIT_ASSERT(20150427 == dt->getDate());
+    CPPUNIT_ASSERT(20150427 == dt->getValue());
   }
 
   /**    Test for Date::Date(const Date& dt)
    *     
    */ 
   void testCopyConstructor() {
-    dt->setDate(20150427);
+    dt->setValue(20150427);
     Date cpDate(*dt);
-    CPPUNIT_ASSERT(20150427 == cpDate.getDate());
+    CPPUNIT_ASSERT(20150427 == cpDate.getValue());
   }
 
   /**    Test for Date::nextDate()
@@ -85,18 +85,18 @@ class FixtureDate : public CppUnit::TestFixture {
    *     Test case 4: 20151215->20151216
    */ 
   void testNextDate() {
-    dt->setDate(20150228);
+    dt->setValue(20150228);
     dt->nextDate();
-    CPPUNIT_ASSERT(20150301 == dt->getDate());
-    dt->setDate(20160228);
+    CPPUNIT_ASSERT(20150301 == dt->getValue());
+    dt->setValue(20160228);
     dt->nextDate();
-    CPPUNIT_ASSERT(20160229 == dt->getDate());
-    dt->setDate(20150930);
+    CPPUNIT_ASSERT(20160229 == dt->getValue());
+    dt->setValue(20150930);
     dt->nextDate();
-    CPPUNIT_ASSERT(20151001 == dt->getDate());
-    dt->setDate(20151215);
+    CPPUNIT_ASSERT(20151001 == dt->getValue());
+    dt->setValue(20151215);
     dt->nextDate();
-    CPPUNIT_ASSERT(20151216 == dt->getDate());
+    CPPUNIT_ASSERT(20151216 == dt->getValue());
   }
 
   /**    Test for Date::isValid()
@@ -108,12 +108,12 @@ class FixtureDate : public CppUnit::TestFixture {
    *     Test case 3: 20151930(invalid)->20150301
    */ 
   void testIsValid() {
-    dt->setDate(20150229);
-    CPPUNIT_ASSERT(20150301 == dt->getDate());
-    dt->setDate(20160229);
-    CPPUNIT_ASSERT(20160229 == dt->getDate());
-    dt->setDate(20151930);
-    CPPUNIT_ASSERT(20150301 == dt->getDate());
+    dt->setValue(20150229);
+    CPPUNIT_ASSERT(20150301 == dt->getValue());
+    dt->setValue(20160229);
+    CPPUNIT_ASSERT(20160229 == dt->getValue());
+    dt->setValue(20151930);
+    CPPUNIT_ASSERT(20150301 == dt->getValue());
    }
 };
 

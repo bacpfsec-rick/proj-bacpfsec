@@ -5,6 +5,7 @@ OBJECTS1 = Date.o TestDate.o
 OBJECTS2 = Date.o State.o TestState.o
 
 all:   TestDate TestState
+#all: TestState
 
 TestDate: $(OBJECTS1)
 	g++ -std=c++0x -L $(LIBDIR) -o $@ $^ $(LNFLAGS)
@@ -19,3 +20,4 @@ TestState: $(OBJECTS2)
 clean:
 	rm -rf *o *~
 	rm TestDate
+	rm TestState
