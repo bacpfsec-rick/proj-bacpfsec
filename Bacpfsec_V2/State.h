@@ -68,6 +68,11 @@ public:
    */ 
   void merge(std::string s);
 
+  /**    Merge another state at the same day
+   *     @param st   A state which is the same as current
+   *     @note       Designed for flexibility
+   */
+  void merge(State st);
 
 private:
   /** Storage of progress detail */ 

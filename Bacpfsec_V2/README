@@ -33,12 +33,19 @@ v2.2.2:I&T State Class		0d04632		Supply func. merge to state class
 						Modify	State.h
 							State.cc
 							FixtureState.h
-V2.2.3:Rename Date Class	6cc9845		Rename members in Date to avoid confusion
+V2.2.3:I&T  Date Class		6cc9845		Rename members in Date to avoid confusion
 	      	   				ISSUE:	A variant to merge is needed
 							State should be merged based on state date
 	      	   				Modify	Date.h
 							Date.cc
 							FixtureDate.h
 							FixtureState.h
-
+V2.2.4:I&T Date Class		6fa928c		Append == and != operator
+	      	   				Modify	Date.h
+							Date.cc
+							FixtureDate.h
+V2.2.5:I&T State Class				Provide merge on state
+						Modify	State.h
+							State.cc
+							FixtureState.h	   	 
 

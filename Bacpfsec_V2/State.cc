@@ -45,3 +45,9 @@ std::string State::getContent() {
 void State::merge(std::string s) {
   content += (" + " + s);
 }
+
+void State::merge(State st) {
+  if (st.getDate() == getDate()) {
+    merge(st.getContent());
+  }
+}
