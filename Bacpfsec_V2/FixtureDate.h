@@ -26,6 +26,7 @@ class FixtureDate : public CppUnit::TestFixture {
   CPPUNIT_TEST(testCopyConstructor);
   CPPUNIT_TEST(testNextDate);
   CPPUNIT_TEST(testIsValid);
+  CPPUNIT_TEST(testEquivalent);
   CPPUNIT_TEST_SUITE_END();
 
  private:
@@ -77,11 +78,8 @@ class FixtureDate : public CppUnit::TestFixture {
   /**    Test for Date::nextDate()
    *
    *     Test case 1: 20150228->20150301
-   *
    *     Test case 2: 20160228->20160229
-   *
    *     Test case 3: 20150930->20151001
-   *
    *     Test case 4: 20151215->20151216
    */ 
   void testNextDate() {
@@ -102,9 +100,7 @@ class FixtureDate : public CppUnit::TestFixture {
   /**    Test for Date::isValid()
    *
    *     Test case 1: 20150229(invalid)->20150301
-   *
    *     Test case 2: 20160229(valid)->20160229
-   *
    *     Test case 3: 20151930(invalid)->20150301
    */ 
   void testIsValid() {
@@ -115,6 +111,17 @@ class FixtureDate : public CppUnit::TestFixture {
     dt->setValue(20151930);
     CPPUNIT_ASSERT(20150301 == dt->getValue());
    }
+
+  /**    Test for equivalent check
+   *
+   *     Test case 1: 20150201==20150201
+   *     Test case 2: 20150202!=20150201
+   */
+  void testEquivalent() {
+    Date d1(20150201), d2(20150201),  d3(20150202);
+    CPPUNIT_ASSERT(d1 == d2);
+    CPPUNIT_ASSERT(d2 != d3);
+  }
 };
 
 #endif

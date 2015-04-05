@@ -125,3 +125,11 @@ bool Date::isValid() {
   }
   return false;
 }
+
+bool Date::operator==(Date d){
+  return date==d.getValue();
+}
+
+bool Date::operator!=(Date d){
+  return date!=d.getValue();
+}

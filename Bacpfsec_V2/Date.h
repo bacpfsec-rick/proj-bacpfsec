@@ -55,6 +55,16 @@ public:
    */ 
   void nextDate();
 
+  /**    Overload == operator    
+   *     %param d    another date
+   */
+  bool operator==(Date d);
+
+  /**    Overload != operator    
+   *     %param d    another date
+   */
+  bool operator!=(Date d);
+
 private:
   /** Storage of date value */ 
   int date;
