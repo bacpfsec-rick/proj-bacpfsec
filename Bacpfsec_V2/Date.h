@@ -6,8 +6,8 @@
  *
  * Date Class is used for State Class
  */
-#ifndef DATE_H
-#define DATE_H
+#ifndef _DATE_H_
+#define _DATE_H_
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>

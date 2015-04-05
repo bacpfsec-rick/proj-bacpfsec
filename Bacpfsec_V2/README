@@ -44,8 +44,13 @@ V2.2.4:I&T Date Class		6fa928c		Append == and != operator
 	      	   				Modify	Date.h
 							Date.cc
 							FixtureDate.h
-V2.2.5:I&T State Class				Provide merge on state
+V2.2.5:I&T State Class		7e40e6c		Provide merge on state
 						Modify	State.h
 							State.cc
-							FixtureState.h	   	 
-
+							FixtureState.h
+V3.3.0:Impl Task Class	   	98a0802		Implement the basic Task Class	
+						ADD	Task.h
+							Task.cc
+V3.3.1:Test Task Class				Test the baisc Task class with CppUnitFixture    	 				
+	    	 				ADD	FixtureTask.h
+							Task.cc

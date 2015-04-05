@@ -6,26 +6,26 @@
  *
  * Task Class for actual recording of one task
  */
-
+#include "Task.h"
 
 Task::Task() :
   taskName("Empty Task"), status(0) {}
 
-Task(std::string tn, const std::vector<State>& st, bool s) :
+Task::Task(std::string tn, const std::vector<State>& st, bool s) :
   taskName(tn), states(st), status(s) {}
 
-Task(const Task& t) :
+Task::Task(const Task& t) :
   taskName(t.taskName), states(t.states), status(t.status) {}
 
 Task::~Task() {
   states.clear();
 }
 
-void Task::setStates(const vector<state>& sts) {
+void Task::setStates(const std::vector<State>& sts) {
   states = sts;
 }
 
-vector<state>& Task::getStates() {
+std::vector<State>& Task::getStates() {
   return states;
 }
 

@@ -6,8 +6,8 @@
  *
  * Task Class for actual recording of one task
  */
-#ifndef TASK_H
-#define TASK_H
+#ifndef _TASK_H_
+#define _TASK_H_
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -48,12 +48,12 @@ public:
   /**    Setter for states
    *     @param dt    A vector of states
    */ 
-  void setStates(const vector<state>& sts);
+  void setStates(const std::vector<State>& sts);
 
   /**    Getter for states
    *     @return      A reference to vector of recorded states
    */ 
-  vector<state>& getStates();
+  std::vector<State>& getStates();
 
   /**    Setter for task name
    *     @param s    A string for task name
@@ -80,7 +80,7 @@ private:
   std::string taskName;
 
   /** Storage of states in vector*/
-  vector<State> states;
+  std::vector<State> states;
 
   /*  Storage of current task status
    *  0 : In progress

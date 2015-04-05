@@ -6,8 +6,8 @@
  *
  * State Class is used for Task Class
  */
-#ifndef STATE_H
-#define STAET_H
+#ifndef _STATE_H_
+#define _STAET_H_
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
