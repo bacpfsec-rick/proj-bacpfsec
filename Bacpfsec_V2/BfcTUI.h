@@ -65,6 +65,26 @@ class BfcTUI : public BfcPrototype {
    */
   void briefReport(std::ostream& os, std::vector<Task>& ts);
 
+  /**    timeline function with variant
+   *     @param os        ostream
+   *     @param ts        reference to a task vector
+   *     @param s         start Date input from user
+   *     @param e         end Date input from user
+   *     @param m         boolean selector, 0:horizontal, 1:vertical
+   *
+   */
+  void timeline(std::ostream& os, std::vector<Task>& ts, 
+		Date s, Date e, bool m);
+
  private:
+  /**    Private helper to build horizontal timeline
+   *     @param os        ostream
+   *     @param ts        reference to a task vector
+   *     @param s         start Date input from user
+   *     @param e         end Date input from user
+   *
+   */
+  void timelineVer(std::ostream& os, std::vector<Task>& ts, Date s, Date e);
+
 };
 #endif

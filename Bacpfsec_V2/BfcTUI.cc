@@ -76,3 +76,69 @@ void BfcTUI::briefReport(std::ostream& os, std::vector<Task>& ts) {
   os<<"   Number of tasks cancalled   : "<<
     getNumOfTaskCancelled()<<std::endl;
 }
+
+void BfcTUI::timeline(std::ostream& os, std::vector<Task>& ts,
+		      Date s, Date e, bool m) {
+  int sdValue = getStartDate().getValue(),
+    edValue = getEndDate().getValue(),
+    sValue = s.getValue(), eValue = e.getValue();
+  int sdYear=sdValue/10000, edYear=edValue/10000,
+    sYear=sValue/10000, eYear=eValue/10000;
+  int sdMon=sdValue/100%100, edMon=edValue/100%100,
+    sMon=sValue/100%100, eMon=eValue/100%100;
+  int sdDay=sdValue%100, edDay=edValue%100,
+    sDay=sValue%100, eDay=eValue%100;
+  if ((sdYear>eYear) ||
+      (sdYear==eYear && sdMon>eMon) ||
+      (sdYear==eYear && sdMon==eMon && sdDay>eDay) ||
+      (edYear<sYear) ||
+      (edYear==sYear && edMon<sMon) ||
+      (edYear==sYear && edMon==sMon && edDay<sDay) ) {
+    os<<"   ***Nothing done in given period***"<<std::endl;
+  } else {
+    if (m) {
+      timelineVer(os,ts,s,e);
+    } else {
+    }
+  }
+
+}
+
+
+void BfcTUI::timelineVer(std::ostream& os, std::vector<Task>& ts,
+			 Date s, Date e) {
+  // print title
+  os<<std::left<<std::setw(15)<<"Date\\Task";
+  for (int i=0; i<ts.size(); ++i) {
+    os<<std::left<<std::setw(15)<<ts[i].getTaskName();
+  }
+  os<<std::endl;
+  // print date
+  int track[ts.size()];
+  for(int i=0; i<ts.size(); ++i) {
+    track[i]=0;
+  }
+  // print states
+  int last = (getEndDate().getValue()>e.getValue()) ? e.getValue() : getEndDate().getValue();
+  for(int i=s.getValue(); i<=last; i=s.getValue()) {
+    printDay(os,Date(i),15);
+    for(int j=0; j<ts.size(); ++j) {
+      if (ts[j].getStates()[ts[j].getStates().size()-1].getDate().getValue()<i) {
+	os<<std::setw(15)<<"";
+	continue;
+      }
+      while( ts[j].getStates()[track[j]].getDate().getValue()<i) {
+	++track[j];
+      }
+      if (ts[j].getStates()[track[j]].getDate().getValue()==i) {
+	os<<std::left<<std::setw(15)<<
+	  ts[j].getStates()[track[j]].getContent();
+	++track[j];
+      } else {
+	os<<std::setw(15)<<"";
+      }
+    }
+    os<<std::endl;
+    s.nextDate();
+  }
+}
