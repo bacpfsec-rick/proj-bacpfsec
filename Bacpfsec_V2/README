@@ -59,7 +59,7 @@ V4.4.1:I&T BfcPrototype		a97fdd2		Provide the prototype with basic setters and g
 							BfcPrototype.cc
 	    	 					FixtureBfcPrototype.h
 							TestBfcPrototype.cc
-V4.4.2:I&T BfcPrototype				Impl&Test readState function
+V4.4.2:I&T BfcPrototype		613c707		Impl&Test readState function
 	   	 				Modify	BfcPrototype.h
 							BfcPrototype.cc
 							FixtureBfcPrototype.h

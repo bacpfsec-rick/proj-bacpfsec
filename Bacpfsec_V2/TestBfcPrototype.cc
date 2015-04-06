@@ -1,10 +1,10 @@
 /**
- * @file   TestTask.cc
+ * @file   TestBcfPrototype.cc
  * @Author Bacpfsec Rick
  * @date   20150405
- * @brief  Test program for BfcPrototype Class
+ * @brief  Test program for BcfPrototype Class
  *
- * TestBfcPrototype applies CppUnit test towards BfcPrototype Class
+ * TestBcfPrototype applies CppUnit test towards BcfPrototype Class
  */
 
 #include "FixtureBfcPrototype.h"
