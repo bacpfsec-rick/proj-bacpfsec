@@ -103,6 +103,16 @@ class BfcTUI : public BfcPrototype {
    */
   void working(std::ostream& os, std::istream& is, Task& t);
 
+  /**    instruct to dictate instructions
+   *     @return          boolean as valid instruction
+   */
+  bool instruct();
+
+  /**    run as the runner of BfcTUI
+   *
+   */
+  void run();
+
  private:
   /**    Private helper to build vertical timeline
    *     @param os        ostream

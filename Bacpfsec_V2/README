@@ -97,8 +97,14 @@ V2.5.6:I&T BfcTUI Class		cfb1300		I&T selectTask
 							BfcTUI.cc
 							FixtureBfcTUI.h
 
-V2.5.7:I&T Impl Class		cfb1300		Impl selectAction & working
+V2.5.7:Impl BfcTUI Class	45308b5		Impl selectAction & working
 	   	  				Modify  BfcTUI.h
 							BfcTUI.cc
 							BfcPrototype.h
 							BfcPrototype.cc
+V2.5.8:Impl BfcTUI Class			Impl instruction
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+V2.5.9:Impl BfcTUI Class			Impl run() as the main runner
+	    	   				Modify  BfcTUI.h
+							BfcTUI.cc
