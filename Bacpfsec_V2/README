@@ -67,8 +67,12 @@ V2.4.2:I&T BfcPrototype		645fbf6		Impl&Test readTasks function
 	   	 				Modify	BfcPrototype.h
 							BfcPrototype.cc
 							FixtureBfcPrototype.h
-V2.5.0:I&I BfcTUI				Build TUI based on prototype
+V2.5.0:I&T BfcTUI Class		be847dd		Build TUI based on prototype
 	   					Add     BfcTUI.h
 							BfcTUI.cc
 							FixtureBfcTUI.h
 							TestBfcTUI.h
+V2.5.1:I&T BfcTUI Class				I&T showRecord in BfcTUI
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h

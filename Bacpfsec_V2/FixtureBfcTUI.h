@@ -16,6 +16,7 @@
 #include <cppunit/ui/text/TestRunner.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include "BfcTUI.h"
+#include "Task.h"
 #include <vector>
 #include <iostream>
 
@@ -23,6 +24,7 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
  public:
   CPPUNIT_TEST_SUITE(FixtureBfcTUI);
   CPPUNIT_TEST(testPrintDay);
+  CPPUNIT_TEST(testShowRecord);
   CPPUNIT_TEST_SUITE_END();
 
  private:
@@ -39,8 +41,6 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
 
   /**    Tests for BfcTUI::printDay(ostream&, Date, int);
    *      
-   *     Test input: 20150302
-   *
    */ 
   void testPrintDay() {
     std::stringstream ss;
@@ -50,5 +50,20 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
     CPPUNIT_ASSERT("2015-3-2" == s);
   }
 
+  /**    Tests for BfcTUI::showRecord(std::ostream&,std::vector<Task>&,int);
+   *      
+   */ 
+  void testShowRecord() {
+    std::vector<Task> ts;
+    ts.push_back(Task("Test",std::vector<State>(),1));
+    ts[0].getStates().push_back(State("S1",Date(20150301)));
+    std::stringstream ss;
+    tui->showRecord(ss,ts,1);
+    std::string s, result="";
+    while (ss>>s) {
+      result += s;
+    }
+    CPPUNIT_ASSERT("Taskname:TestDetails:[S1]2015-3-1" == result);
+  }
 };
 #endif

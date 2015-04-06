@@ -24,7 +24,7 @@
  *
  */
 class BfcTUI : public BfcPrototype {
-public:
+ public:
   /**    Default constructor
    *     
    */ 
@@ -36,10 +36,21 @@ public:
   ~BfcTUI();
 
   /**    Print given date with given width
+   *     @param os        ostream
+   *     @param d         a Date object
+   *     @param witth     desired output width
    *
    */
   void printDay(std::ostream& os, Date d, int width);
 
-private:
+  /**    Private helper for showRecord
+   *     @param os        ostream
+   *     @param ts        reference to a task vector
+   *     @param s         status integer
+   *
+   */
+  void showRecord(std::ostream& os, std::vector<Task>& ts, int s);
+
+ private:
 };
 #endif
