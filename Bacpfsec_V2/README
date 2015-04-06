@@ -76,7 +76,11 @@ V2.5.1:I&T BfcTUI Class		e34d80b		I&T showRecord in BfcTUI
 	   	  				Modify  BfcTUI.h
 							BfcTUI.cc
 							FixtureBfcTUI.h
-V2.5.2:I&T BfcTUI Class				I&T writeRecord in BfcTUI
+V2.5.2:I&T BfcTUI Class		1bc2437		I&T writeRecord in BfcTUI
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
+V2.5.3:I&T BfcTUI Class				I&T briefReport in BfcTUI
 	   	  				Modify  BfcTUI.h
 							BfcTUI.cc
 							FixtureBfcTUI.h

@@ -56,7 +56,14 @@ class BfcTUI : public BfcPrototype {
    *     @param ts        reference to a task vector
    *
    */
-  void write_record(std::ostream& os, std::vector<Task>& ts);
+  void writeRecord(std::ostream& os, std::vector<Task>& ts);
+
+  /**    briefReport to ostream
+   *     @param os        ostream
+   *     @param ts        reference to a task vector
+   *
+   */
+  void briefReport(std::ostream& os, std::vector<Task>& ts);
 
  private:
 };

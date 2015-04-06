@@ -52,7 +52,7 @@ void BfcTUI::showRecord(std::ostream& os, std::vector<Task>& ts, int s) {
   }
 }
 
-void BfcTUI::write_record(std::ostream& os, std::vector<Task>& ts) {
+void BfcTUI::writeRecord(std::ostream& os, std::vector<Task>& ts) {
   for(int i=0; i<ts.size(); ++i) {
     os<<ts[i].getTaskName()<<" ";
     for(int j=0; j<ts[i].getStates().size(); ++j) {
@@ -62,4 +62,17 @@ void BfcTUI::write_record(std::ostream& os, std::vector<Task>& ts) {
     os<<ts[i].getStatus()<<std::endl;
   }
   setRecordLoaded(false);
+}
+
+void BfcTUI::briefReport(std::ostream& os, std::vector<Task>& ts) {
+  os<<"   First date of the recording : "<<
+    getStartDate().getValue()<<std::endl;
+  os<<"   Last date of data updating  : "<<
+    getEndDate().getValue()<<std::endl;
+  os<<"   Number of tasks in progress : "<<
+    getNumOfTaskUncomplete()<<std::endl;
+  os<<"   Number of tasks completed   : "<<
+    (ts.size()-getNumOfTaskUncomplete()-getNumOfTaskCancelled())<<std::endl;
+  os<<"   Number of tasks cancalled   : "<<
+    getNumOfTaskCancelled()<<std::endl;
 }

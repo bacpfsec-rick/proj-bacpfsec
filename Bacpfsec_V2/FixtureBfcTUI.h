@@ -26,6 +26,7 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
   CPPUNIT_TEST(testPrintDay);
   CPPUNIT_TEST(testShowRecord);
   CPPUNIT_TEST(testWriteRecord);
+  CPPUNIT_TEST(testBriefReport);
   CPPUNIT_TEST_SUITE_END();
 
  private:
@@ -75,12 +76,33 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
     ts.push_back(Task("Test",std::vector<State>(),1));
     ts[0].getStates().push_back(State("S1 + S2 + S3",Date(20150301)));
     std::stringstream ss;
-    tui->showRecord(ss,ts,1);
+    tui->writeRecord(ss,ts);
     std::string s, result="";
     while (ss>>s) {
       result += s;
     }
-    CPPUNIT_ASSERT("Taskname:TestDetails:[S1+S2+S3]2015-3-1" == result);
+    CPPUNIT_ASSERT("Test[S1+S2+S3]201503011" == result);
+  }
+
+  /**    Tests for BfcTUI::briefReport(std::ostream&,std::vector<Task>&);
+   *      
+   */ 
+  void testBriefReport() {
+    std::vector<Task> ts;
+    ts.push_back(Task("1",std::vector<State>(),0));
+    ts.push_back(Task("2",std::vector<State>(),2));
+    ts.push_back(Task("3",std::vector<State>(),0));
+    ts.push_back(Task("4",std::vector<State>(),1));
+    ts.push_back(Task("5",std::vector<State>(),1));
+    tui->setNumOfTaskUncomplete(2);
+    tui->setNumOfTaskCancelled(1);
+    std::stringstream ss;
+    tui->briefReport(ss,ts);
+    std::string s, result="";
+    while (ss>>s) {
+      result += s;
+    }
+    CPPUNIT_ASSERT("Firstdateoftherecording:20991231Lastdateofdataupdating:19700101Numberoftasksinprogress:2Numberoftaskscompleted:2Numberoftaskscancalled:1" == result);
   }
 };
 #endif
