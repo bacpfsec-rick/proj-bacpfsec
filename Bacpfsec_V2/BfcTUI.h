@@ -77,7 +77,7 @@ class BfcTUI : public BfcPrototype {
 		Date s, Date e, bool m);
 
  private:
-  /**    Private helper to build horizontal timeline
+  /**    Private helper to build vertical timeline
    *     @param os        ostream
    *     @param ts        reference to a task vector
    *     @param s         start Date input from user
@@ -85,6 +85,15 @@ class BfcTUI : public BfcPrototype {
    *
    */
   void timelineVer(std::ostream& os, std::vector<Task>& ts, Date s, Date e);
+
+  /**    Private helper to build horizontal timeline
+   *     @param os        ostream
+   *     @param ts        reference to a task vector
+   *     @param s         start Date input from user
+   *     @param e         end Date input from user
+   *
+   */
+  void timelineHor(std::ostream& os, std::vector<Task>& ts, Date s, Date e);
 
 };
 #endif

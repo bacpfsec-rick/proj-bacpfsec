@@ -99,11 +99,11 @@ void BfcTUI::timeline(std::ostream& os, std::vector<Task>& ts,
     if (m) {
       timelineVer(os,ts,s,e);
     } else {
+      timelineHor(os,ts,s,e);
     }
   }
 
 }
-
 
 void BfcTUI::timelineVer(std::ostream& os, std::vector<Task>& ts,
 			 Date s, Date e) {
@@ -113,7 +113,7 @@ void BfcTUI::timelineVer(std::ostream& os, std::vector<Task>& ts,
     os<<std::left<<std::setw(15)<<ts[i].getTaskName();
   }
   os<<std::endl;
-  // print date
+  // keep track
   int track[ts.size()];
   for(int i=0; i<ts.size(); ++i) {
     track[i]=0;
@@ -142,3 +142,35 @@ void BfcTUI::timelineVer(std::ostream& os, std::vector<Task>& ts,
     s.nextDate();
   }
 }
+
+void BfcTUI::timelineHor(std::ostream& os, std::vector<Task>& ts,
+			 Date s, Date e) {
+  // print title and date
+  os<<std::left<<std::setw(15)<<"Task\\Date";
+  int last = (getEndDate().getValue()>e.getValue()) ? e.getValue() : getEndDate().getValue();
+  Date d(s);
+  for (int i=d.getValue(); i<=last; i=d.getValue()) {
+    printDay(os,Date(i),15);
+    d.nextDate();
+  }
+  // print title and states
+  for (int k=0; k<ts.size(); k++) {
+    os<<std::left<<std::setw(15)<<ts[k].getTaskName();
+    d = s;
+    int curr = 0;
+    for(int i=d.getValue(); i<=last; i=d.getValue()) {
+      if (Date(i)==ts[k].getStates()[curr].getDate()) {
+	os<<std::left<<std::setw(15)<<ts[k].getStates()[curr].getContent();
+	curr++;
+      } else {
+	os<<std::setw(15)<<"";
+      }
+      d.nextDate();
+    }
+    os<<std::endl;
+  }
+}
+
+    
+
+

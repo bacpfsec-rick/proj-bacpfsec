@@ -28,6 +28,7 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
   CPPUNIT_TEST(testWriteRecord);
   CPPUNIT_TEST(testBriefReport);
   CPPUNIT_TEST(testTimelineVer);
+  CPPUNIT_TEST(testTimelineHor);
   CPPUNIT_TEST_SUITE_END();
 
  private:
@@ -106,7 +107,7 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
     CPPUNIT_ASSERT("Firstdateoftherecording:20991231Lastdateofdataupdating:19700101Numberoftasksinprogress:2Numberoftaskscompleted:2Numberoftaskscancalled:1" == result);
   }
 
- /**    Tests for horizontal timeline
+ /**    Tests for vertical timeline
    *      
    */ 
   void testTimelineVer () {
@@ -124,6 +125,26 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
       result += s;
     }
     CPPUNIT_ASSERT("Date\\TaskTest1Test22015-2-282015-3-1XXXX2015-3-2YYY2015-3-3" == result);
+  }
+
+ /**    Tests for horizontal timeline
+   *      
+   */ 
+  void testTimelineHor () {
+    tui->setStartDate(Date(20150225));
+    tui->setEndDate(Date(20150308));
+    std::vector<Task> ts;
+    ts.push_back(Task("Test1",std::vector<State>(),1));
+    ts[0].getStates().push_back(State("XXXX",Date(20150301)));
+    ts.push_back(Task("Test2",std::vector<State>(),0));
+    ts[1].getStates().push_back(State("YYY",Date(20150302)));
+    std::stringstream ss;
+    tui->timeline(ss,ts,Date(20150228),Date(20150303),0);
+    std::string s, result="";
+    while (ss>>s) {
+      result += s;
+    }
+    CPPUNIT_ASSERT("Task\\Date2015-2-282015-3-12015-3-22015-3-3Test1XXXXTest2YYY" == result);
   }
 };
 #endif
