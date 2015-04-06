@@ -80,7 +80,7 @@ V2.5.2:I&T BfcTUI Class		1bc2437		I&T writeRecord in BfcTUI
 	   	  				Modify  BfcTUI.h
 							BfcTUI.cc
 							FixtureBfcTUI.h
-V2.5.3:I&T BfcTUI Class				I&T briefReport in BfcTUI
+V2.5.3:I&T BfcTUI Class		597266e		I&T briefReport in BfcTUI
 	   	  				Modify  BfcTUI.h
 							BfcTUI.cc
 							FixtureBfcTUI.h
