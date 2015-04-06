@@ -48,26 +48,26 @@ V2.2.5:I&T State Class		7e40e6c		Provide merge on state
 						Modify	State.h
 							State.cc
 							FixtureState.h
-V3.3.0:Impl Task Class	   	98a0802		Implement the basic Task Class	
+V2.3.0:Impl Task Class	   	98a0802		Implement the basic Task Class	
 						ADD	Task.h
 							Task.cc
-V3.3.1:Test Task Class		41145e8		Test the baisc Task class with CppUnitFixture    	 				
+V2.3.1:Test Task Class		41145e8		Test the baisc Task class with CppUnitFixture    	 				
 	    	 				ADD	FixtureTask.h
 							TestTask.cc
-V4.4.0:I&T BfcPrototype		a97fdd2		Provide the prototype with basic setters and getters
+V2.4.0:I&T BfcPrototype		a97fdd2		Provide the prototype with basic setters and getters
 	    					ADD	BfcPrototype.h
 							BfcPrototype.cc
 	    	 					FixtureBfcPrototype.h
 							TestBfcPrototype.cc
-V4.4.1:I&T BfcPrototype		6d33be8		Impl&Test readStates function
+V2.4.1:I&T BfcPrototype		6d33be8		Impl&Test readStates function
 	   	 				Modify	BfcPrototype.h
 							BfcPrototype.cc
 							FixtureBfcPrototype.h
-V4.4.2:I&T BfcPrototype		645fbf6		Impl&Test readTasks function
+V2.4.2:I&T BfcPrototype		645fbf6		Impl&Test readTasks function
 	   	 				Modify	BfcPrototype.h
 							BfcPrototype.cc
 							FixtureBfcPrototype.h
-V5.5.0:I&I BfcTUI				Build TUI based on prototype
+V2.5.0:I&I BfcTUI				Build TUI based on prototype
 	   					Add     BfcTUI.h
 							BfcTUI.cc
 							FixtureBfcTUI.h

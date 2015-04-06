@@ -38,12 +38,16 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
   }
 
   /**    Tests for BfcTUI::printDay(ostream&, Date, int);
-   *     
+   *      
+   *     Test input: 20150302
    *
    */ 
   void testPrintDay() {
     std::stringstream ss;
-    tui->printDay(ss,Date(20150302),15);
+    tui->printDay(ss,Date(20150302),10);
+    std::string s;
+    ss>>s;
+    CPPUNIT_ASSERT("2015-3-2" == s);
   }
 
 };
