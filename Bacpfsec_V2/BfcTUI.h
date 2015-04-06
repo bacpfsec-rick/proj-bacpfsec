@@ -43,13 +43,20 @@ class BfcTUI : public BfcPrototype {
    */
   void printDay(std::ostream& os, Date d, int width);
 
-  /**    Private helper for showRecord
+  /**    showRecord to ostream
    *     @param os        ostream
    *     @param ts        reference to a task vector
    *     @param s         status integer
    *
    */
   void showRecord(std::ostream& os, std::vector<Task>& ts, int s);
+
+  /**    writeRecord to ostream
+   *     @param os        ostream
+   *     @param ts        reference to a task vector
+   *
+   */
+  void write_record(std::ostream& os, std::vector<Task>& ts);
 
  private:
 };

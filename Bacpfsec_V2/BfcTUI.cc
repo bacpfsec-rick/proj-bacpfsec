@@ -51,3 +51,15 @@ void BfcTUI::showRecord(std::ostream& os, std::vector<Task>& ts, int s) {
     }
   }
 }
+
+void BfcTUI::write_record(std::ostream& os, std::vector<Task>& ts) {
+  for(int i=0; i<ts.size(); ++i) {
+    os<<ts[i].getTaskName()<<" ";
+    for(int j=0; j<ts[i].getStates().size(); ++j) {
+      os<<"[ "<<ts[i].getStates()[j].getContent()<<" ] "
+	 <<ts[i].getStates()[j].getDate().getValue()<<" ";
+    }
+    os<<ts[i].getStatus()<<std::endl;
+  }
+  setRecordLoaded(false);
+}

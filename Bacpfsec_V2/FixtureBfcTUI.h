@@ -25,6 +25,7 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
   CPPUNIT_TEST_SUITE(FixtureBfcTUI);
   CPPUNIT_TEST(testPrintDay);
   CPPUNIT_TEST(testShowRecord);
+  CPPUNIT_TEST(testWriteRecord);
   CPPUNIT_TEST_SUITE_END();
 
  private:
@@ -64,6 +65,22 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
       result += s;
     }
     CPPUNIT_ASSERT("Taskname:TestDetails:[S1]2015-3-1" == result);
+  }
+
+  /**    Tests for BfcTUI::writeRecord(std::ostream&,std::vector<Task>&);
+   *      
+   */ 
+  void testWriteRecord() {
+    std::vector<Task> ts;
+    ts.push_back(Task("Test",std::vector<State>(),1));
+    ts[0].getStates().push_back(State("S1 + S2 + S3",Date(20150301)));
+    std::stringstream ss;
+    tui->showRecord(ss,ts,1);
+    std::string s, result="";
+    while (ss>>s) {
+      result += s;
+    }
+    CPPUNIT_ASSERT("Taskname:TestDetails:[S1+S2+S3]2015-3-1" == result);
   }
 };
 #endif
