@@ -63,8 +63,12 @@ V4.4.1:I&T BfcPrototype		6d33be8		Impl&Test readStates function
 	   	 				Modify	BfcPrototype.h
 							BfcPrototype.cc
 							FixtureBfcPrototype.h
-V4.4.2:I&T BfcPrototype				Impl&Test readTasks function
+V4.4.2:I&T BfcPrototype		645fbf6		Impl&Test readTasks function
 	   	 				Modify	BfcPrototype.h
 							BfcPrototype.cc
 							FixtureBfcPrototype.h
-
+V5.5.0:I&I BfcTUI				Build TUI based on prototype
+	   					Add     BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
+							TestBfcTUI.h

@@ -1,5 +1,5 @@
 /**
- * @file   FixtureTask.h
+ * @file   FixtureBfcPrototype.h
  * @Author Bacpfsec Rick
  * @date   20150405
  * @brief  CppUnit Fixture setup for BfcPrototype class
@@ -7,8 +7,8 @@
  * FixtureBfcPrototype is used in TestBfcPrototype for BfcPrototype Class
  */
 
-#ifndef _FIXTUREBfcPrototype_H_
-#define _FIXTUREBfcPrototype_H_
+#ifndef _FIXTUREBFCPROTOTYPE_H_
+#define _FIXTUREBFCPROTOTYPE_H_
 
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
@@ -97,10 +97,13 @@ class FixtureBfcPrototype : public CppUnit::TestFixture {
 
   /**    Test for BfcPrototype::readStates(istream, Task&)
    *
+   *     Test input:
+   *     [ ~P2 ] 20150302 [ ~P3 + ~P5 ] 20150304 1
+   *
    */ 
   void testReadStates() {
     Task t("New",std::vector<State>(),2);
-    bfc->readStates(std::cin,t); // Input "[ ~P2 ] 20150302 [ ~P3 + ~P5 ] 20150304 1" to test
+    bfc->readStates(std::cin,t);
     std::vector<State>& ref = t.getStates();
     CPPUNIT_ASSERT(ref[0].getDate() == Date(20150302));
     CPPUNIT_ASSERT(ref[0].getContent() == "~P2 ");
@@ -111,12 +114,14 @@ class FixtureBfcPrototype : public CppUnit::TestFixture {
 
   /**    Test for BfcPrototype::readStates(istream, vector<Task>&)
    *
+   *     Test input:
+   *     Book1 [ ~P2 ] 20150302 [ ~P3 + ~P5 ] 20150304 1
+   *     Book2 [ ~C1 ] 20150101 [ ~C3 ] 20150502 0
+   *
    */ 
   void testReadTasks() {
     std::vector<Task> ts;
     bfc->readTasks(std::cin,ts);
-    // Input: "Book1 [ ~P2 ] 20150302 [ ~P3 + ~P5 ] 20150304 1"
-    //        "Book2 [ ~C1 ] 20150101 [ ~C3 ] 20150502 0"
     std::vector<Task>& ref = ts;
     std::vector<State>& ref0 = ts[0].getStates();
     std::vector<State>& ref1 = ts[1].getStates();

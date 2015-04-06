@@ -19,10 +19,10 @@
  * @brief  BfcPrototype Class is abstract base class
  * 
  * BfcPrototype Class serves as the abstract base class for variety
- * BacpfsecTUI and BacpfsecGUI would inherited from BfcPrototype *
+ * BacpfsecTUI and BacpfsecGUI would inherited from BfcPrototype
  */
 class BfcPrototype {
-public:
+ public:
   /**    Default constructor
    *     
    */ 
@@ -101,7 +101,7 @@ public:
    */
   virtual void readTasks(std::istream& is, std::vector<Task>& ts);
 
-private:
+ private:
   /** Const limit of tasks in progress */
   const int maxTaskInProgress = 15;
 
@@ -123,7 +123,8 @@ private:
   /** Storage of the tasks as a vector */
   std::vector<Task> tasks;
 
-  /** Private initializer
+ protected:
+  /** Protected initializer
    *
    * Helper to initialize all the private member
    *

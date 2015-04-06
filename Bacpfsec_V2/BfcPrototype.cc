@@ -4,7 +4,7 @@
  * @date   20150405
  * @brief  Implementation for BfcPrototype Class
  *
- * Task Class for actual recording of one task
+ * BfcPrototype is the base class for TUI and GUI
  */
 #include "BfcPrototype.h"
 
