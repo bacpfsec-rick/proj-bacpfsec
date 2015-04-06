@@ -76,6 +76,15 @@ class BfcTUI : public BfcPrototype {
   void timeline(std::ostream& os, std::vector<Task>& ts, 
 		Date s, Date e, bool m);
 
+  /**    timeline function with variant
+   *     @param os        ostream
+   *     @param is        istream
+   *     @param ts        reference to a task vector
+   *     @return          integer index for a task
+   *
+   */
+  int selectTask(std::ostream& os, std::istream& is, std::vector<Task>& ts);
+
  private:
   /**    Private helper to build vertical timeline
    *     @param os        ostream

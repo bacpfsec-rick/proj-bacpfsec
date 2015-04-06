@@ -29,6 +29,7 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
   CPPUNIT_TEST(testBriefReport);
   CPPUNIT_TEST(testTimelineVer);
   CPPUNIT_TEST(testTimelineHor);
+  CPPUNIT_TEST(testSelectTask);
   CPPUNIT_TEST_SUITE_END();
 
  private:
@@ -146,5 +147,26 @@ class FixtureBfcTUI : public CppUnit::TestFixture {
     }
     CPPUNIT_ASSERT("Task\\Date2015-2-282015-3-12015-3-22015-3-3Test1XXXXTest2YYY" == result);
   }
+
+ /**    Tests for selectTask()
+   *     
+   *    Test 1: select a uncompleted task would return correct number
+   *    Test 2: the prompt information should exclude finished tasks
+   */ 
+  void testSelectTask() {
+    std::vector<Task> ts;
+    ts.push_back(Task("Test1",std::vector<State>(),1));
+    ts.push_back(Task("Test2",std::vector<State>(),0));
+    std::stringstream sin,sout;
+    sin<<2;
+    CPPUNIT_ASSERT(tui->selectTask(sout,sin,ts) == 1);
+    std::string result="", s;
+    while (sout>>s) {
+      result += s;
+    }
+    std::cout<<result<<std::endl;
+    CPPUNIT_ASSERT("(0-Random)(2-Test2)>>>" == result);
+  }
+
 };
 #endif

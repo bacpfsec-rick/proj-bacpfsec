@@ -172,5 +172,25 @@ void BfcTUI::timelineHor(std::ostream& os, std::vector<Task>& ts,
 }
 
     
-
-
+int BfcTUI::selectTask(std::ostream& os, std::istream& is,
+		       std::vector<Task>& ts) {
+ os<<"   (0-Random)";
+  for(int i=0; i<ts.size(); ++i) {
+    if(ts[i].getStatus()==0) {
+      os<<" ("<<i+1<<"-"<<ts[i].getTaskName()<<")";
+    }
+  }
+  os<<std::endl<<">>> ";
+  int choice;
+  is>>choice;
+  if (choice==0) {
+    do {
+      choice = rand()%ts.size();
+    } while (ts[choice].getStatus()!=0);
+    return choice;
+  } else if (choice> ts.size() || ts[choice-1].getStatus()!=0) {
+    os<<"   ***Invalid choice***"<<std::endl;
+    selectTask(os,is,ts);
+  }
+  return choice-1;
+}

@@ -88,7 +88,7 @@ V2.5.4:I&T BfcTUI Class		5fab881		I&T vertical timeline
 	   	  				Modify  BfcTUI.h
 							BfcTUI.cc
 							FixtureBfcTUI.h
-V2.5.5:I&T BfcTUI Class		5fab881		I&T horizontal timeline
+V2.5.5:I&T BfcTUI Class		03e5a96		I&T horizontal timeline
 	   	  				Modify  BfcTUI.h
 							BfcTUI.cc
 							FixtureBfcTUI.h

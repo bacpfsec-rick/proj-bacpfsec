@@ -1,0 +1,154 @@
+\hypertarget{classDate}{\section{Date Class Reference}
+\label{classDate}\index{Date@{Date}}
+}
+
+
+\hyperlink{classDate}{Date} Class is used for time recording.  
+
+
+
+
+{\ttfamily \#include $<$Date.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDate_a4e59ed4ba66eec61c27460c5d09fa1bd}{Date} ()
+\item 
+\hyperlink{classDate_a86d5d0d04d211f5fa077386de1ce7f19}{Date} (int d)
+\item 
+\hyperlink{classDate_a2233b93eaed1626e957435cedfc511de}{Date} (const \hyperlink{classDate}{Date} \&dt)
+\item 
+\hyperlink{classDate_ade4b469433b7966cc034cbcc6799233b}{$\sim$\-Date} ()
+\item 
+void \hyperlink{classDate_a33ea2c0c7bd11cc5fa95ad7d346fcff4}{set\-Value} (int d)
+\item 
+int \hyperlink{classDate_ab92e73e4246833b2e66b373ef3fefdf0}{get\-Value} ()
+\item 
+void \hyperlink{classDate_a689d13b5e5882068308b02073e1ed321}{next\-Date} ()
+\item 
+bool \hyperlink{classDate_a0036e87463cdee6117d27f04933393fb}{operator==} (\hyperlink{classDate}{Date} d)
+\item 
+bool \hyperlink{classDate_a5d7fa843430ed6a618b104b2f9ce8f03}{operator!=} (\hyperlink{classDate}{Date} d)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classDate_a7d9aaa9db591413e21c8b85fdae130ad}{is\-Valid} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classDate_abfe1e095c0de4e7d1ce6ae1ac97026d5}{date}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classDate}{Date} Class is used for time recording. 
+
+\hyperlink{classDate}{Date} Class provides supplementary operations based on the $<$time$>$ library 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDate_a4e59ed4ba66eec61c27460c5d09fa1bd}{\index{Date@{Date}!Date@{Date}}
+\index{Date@{Date}!Date@{Date}}
+\subsubsection[{Date}]{\setlength{\rightskip}{0pt plus 5cm}Date\-::\-Date (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDate_a4e59ed4ba66eec61c27460c5d09fa1bd}
+Default constructor \begin{DoxyNote}{Note}
+Default value is 150301 (i.\-e. 2015/03/01) 
+\end{DoxyNote}
+\hypertarget{classDate_a86d5d0d04d211f5fa077386de1ce7f19}{\index{Date@{Date}!Date@{Date}}
+\index{Date@{Date}!Date@{Date}}
+\subsubsection[{Date}]{\setlength{\rightskip}{0pt plus 5cm}Date\-::\-Date (
+\begin{DoxyParamCaption}
+\item[{int}]{d}
+\end{DoxyParamCaption}
+)}}\label{classDate_a86d5d0d04d211f5fa077386de1ce7f19}
+Parameterized constructor 
+\begin{DoxyParams}{Parameters}
+{\em d} & Value stands for a date \\
+\hline
+\end{DoxyParams}
+set back to default for invalid date \hypertarget{classDate_a2233b93eaed1626e957435cedfc511de}{\index{Date@{Date}!Date@{Date}}
+\index{Date@{Date}!Date@{Date}}
+\subsubsection[{Date}]{\setlength{\rightskip}{0pt plus 5cm}Date\-::\-Date (
+\begin{DoxyParamCaption}
+\item[{const {\bf Date} \&}]{dt}
+\end{DoxyParamCaption}
+)}}\label{classDate_a2233b93eaed1626e957435cedfc511de}
+Copy constructor \hypertarget{classDate_ade4b469433b7966cc034cbcc6799233b}{\index{Date@{Date}!$\sim$\-Date@{$\sim$\-Date}}
+\index{$\sim$\-Date@{$\sim$\-Date}!Date@{Date}}
+\subsubsection[{$\sim$\-Date}]{\setlength{\rightskip}{0pt plus 5cm}Date\-::$\sim$\-Date (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDate_ade4b469433b7966cc034cbcc6799233b}
+Destructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDate_ab92e73e4246833b2e66b373ef3fefdf0}{\index{Date@{Date}!get\-Value@{get\-Value}}
+\index{get\-Value@{get\-Value}!Date@{Date}}
+\subsubsection[{get\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int Date\-::get\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDate_ab92e73e4246833b2e66b373ef3fefdf0}
+Getter \begin{DoxyReturn}{Returns}
+Value of the private date 
+\end{DoxyReturn}
+\hypertarget{classDate_a7d9aaa9db591413e21c8b85fdae130ad}{\index{Date@{Date}!is\-Valid@{is\-Valid}}
+\index{is\-Valid@{is\-Valid}!Date@{Date}}
+\subsubsection[{is\-Valid}]{\setlength{\rightskip}{0pt plus 5cm}bool Date\-::is\-Valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classDate_a7d9aaa9db591413e21c8b85fdae130ad}
+\hyperlink{classDate}{Date} check
+
+Private helper to test if a date is valid \hypertarget{classDate_a689d13b5e5882068308b02073e1ed321}{\index{Date@{Date}!next\-Date@{next\-Date}}
+\index{next\-Date@{next\-Date}!Date@{Date}}
+\subsubsection[{next\-Date}]{\setlength{\rightskip}{0pt plus 5cm}void Date\-::next\-Date (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDate_a689d13b5e5882068308b02073e1ed321}
+Proceed date to next valid date \hypertarget{classDate_a5d7fa843430ed6a618b104b2f9ce8f03}{\index{Date@{Date}!operator!=@{operator!=}}
+\index{operator!=@{operator!=}!Date@{Date}}
+\subsubsection[{operator!=}]{\setlength{\rightskip}{0pt plus 5cm}bool Date\-::operator!= (
+\begin{DoxyParamCaption}
+\item[{{\bf Date}}]{d}
+\end{DoxyParamCaption}
+)}}\label{classDate_a5d7fa843430ed6a618b104b2f9ce8f03}
+Overload != operator param d another date \hypertarget{classDate_a0036e87463cdee6117d27f04933393fb}{\index{Date@{Date}!operator==@{operator==}}
+\index{operator==@{operator==}!Date@{Date}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool Date\-::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Date}}]{d}
+\end{DoxyParamCaption}
+)}}\label{classDate_a0036e87463cdee6117d27f04933393fb}
+Overload == operator param d another date \hypertarget{classDate_a33ea2c0c7bd11cc5fa95ad7d346fcff4}{\index{Date@{Date}!set\-Value@{set\-Value}}
+\index{set\-Value@{set\-Value}!Date@{Date}}
+\subsubsection[{set\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void Date\-::set\-Value (
+\begin{DoxyParamCaption}
+\item[{int}]{d}
+\end{DoxyParamCaption}
+)}}\label{classDate_a33ea2c0c7bd11cc5fa95ad7d346fcff4}
+Setter 
+\begin{DoxyParams}{Parameters}
+{\em d} & Value stands for a date \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDate_abfe1e095c0de4e7d1ce6ae1ac97026d5}{\index{Date@{Date}!date@{date}}
+\index{date@{date}!Date@{Date}}
+\subsubsection[{date}]{\setlength{\rightskip}{0pt plus 5cm}int Date\-::date\hspace{0.3cm}{\ttfamily [private]}}}\label{classDate_abfe1e095c0de4e7d1ce6ae1ac97026d5}
+Storage of date value 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Date_8h}{Date.\-h}\item 
+\hyperlink{Date_8cc}{Date.\-cc}\end{DoxyCompactItemize}
