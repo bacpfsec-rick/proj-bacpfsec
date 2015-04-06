@@ -8,7 +8,7 @@ OBJECTS4 = Date.o Task.o State.o BfcPrototype.o TestBfcPrototype.o
 OBJECTS5 = Date.o Task.o State.o BfcPrototype.o BfcTUI.o TestBfcTUI.o
 OBJECTS6 = Date.o Task.o State.o BfcPrototype.o BfcTUI.o BfcTerminal.o BfcTR.o
 #all:   TestDate TestState TestTask TestBfcPrototype TestBfcTUI
-all: BfcTR.o
+all: BfcTR
 
 TestDate: $(OBJECTS1)
 	g++ -std=c++0x -L $(LIBDIR) -o $@ $^ $(LNFLAGS)

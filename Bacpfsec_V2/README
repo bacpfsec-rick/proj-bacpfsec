@@ -105,10 +105,12 @@ V2.5.7:Impl BfcTUI Class	45308b5		Impl selectAction & working
 V2.6.0:Impl BfcTerminal Class	13785a3		Impl instruction() method based on cout & cin
 	   	  				Add     BfcTerminal.h
 							BfcTerminal.cc
-V2.6.1:Impl BfcTerminal Class			Impl run() based on polymorphisam
+V2.6.1:Impl BfcTerminal Class	51baeee		Impl run() based on polymorphisam
 	    	   				Modify  BfcTerminal.h
 							BfcTerminal.cc
 							BfcTUI.h
 							BfcTUI.cc
 							BfcPrototype.h
 							BfcPrototype.cc
+V2.7.0:Impl BfcTR.cc				Build the terminal-based executable
+	    					Add     BfcTR.cc
