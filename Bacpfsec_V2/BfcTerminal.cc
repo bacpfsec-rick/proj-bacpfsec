@@ -50,6 +50,7 @@ bool BfcTerminal::instruct() {
       std::cout<<"   (0 : List the uncompleted tasks)"<<std::endl;
       std::cout<<"   (1 : List the finished tasks)"<<std::endl;
       std::cout<<"   (2 : List the cancelled tasks)"<<std::endl;
+      std::cout<<">>>"<<std::endl;
       std::cin>>selector;
       showRecord(std::cout,ref,selector);
       break;
@@ -67,7 +68,7 @@ bool BfcTerminal::instruct() {
   case '4':
     {
       int start,end;
-      std::cout<<"   (Input Format)"<<std::endl;
+      std::cout<<"   (Input 2 valid date)"<<std::endl;
       std::cout<<"   (YYYYMMDD YYYYMMDD)"<<std::endl;
       std::cout<<"   (20150101 20151231 for eg.)"<<std::endl<<">>> ";
       std::cin>>start>>end;
@@ -76,10 +77,12 @@ bool BfcTerminal::instruct() {
       std::cout<<"   (Select output destination)"<<std::endl;
       std::cout<<"   (0: Right here at terminal)"<<std::endl;
       std::cout<<"   (1: local TIMELINE.tl file)"<<std::endl;
+      std::cout<<">>>"<<std::endl;
       std::cin>>destination;
       std::cout<<"   (Select output style)"<<std::endl;
       std::cout<<"   (0: Horizontal)"<<std::endl;
       std::cout<<"   (1: Vertical)"<<std::endl;
+      std::cout<<">>>"<<std::endl;
       std::cin>>style;
       if (destination==0) {
 	timeline(std::cout,ref,Date(start),Date(end),style);
@@ -108,4 +111,14 @@ bool BfcTerminal::instruct() {
     return false;
   }
   return true;
+}
+
+void BfcTerminal::run() {
+  srand(time(NULL));
+  std::cout<<"-------------------------"<<std::endl;
+  std::cout<<"|  Welcome to BacpFecE  |"<<std::endl;
+  std::cout<<"-------------------------"<<std::endl;
+  while (instruct()) {
+    std::cout<<">>> "<<std::endl;
+  }
 }

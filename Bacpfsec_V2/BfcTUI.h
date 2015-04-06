@@ -103,6 +103,12 @@ class BfcTUI : public BfcPrototype {
    */
   void working(std::ostream& os, std::istream& is, Task& t);
 
+  /**    Virtual run()
+   *
+   *     Implemented through inheritence
+   */
+  virtual void run();
+
  private:
   /**    Private helper to build vertical timeline
    *     @param os        ostream

@@ -124,3 +124,7 @@ void BfcPrototype::readTasks(std::istream& is, std::vector<Task>& ts) {
   }
   recordLoaded = true;
 }
+
+void BfcPrototype::run() {
+
+}

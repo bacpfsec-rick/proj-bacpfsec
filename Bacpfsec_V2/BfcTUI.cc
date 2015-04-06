@@ -305,3 +305,7 @@ void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
     working(os,is,t);
   }
 }
+
+void BfcTUI::run() {
+
+}

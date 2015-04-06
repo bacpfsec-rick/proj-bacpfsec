@@ -106,6 +106,12 @@ class BfcPrototype {
    */
   virtual void readTasks(std::istream& is, std::vector<Task>& ts);
 
+  /**    Virtual run()
+   *
+   *     Implemented through inheritence
+   */
+  virtual void run();
+
  private:
   /** Const limit of tasks in progress */
   const int maxTaskInProgress = 15;
