@@ -26,6 +26,7 @@ class FixtureBfcPrototype : public CppUnit::TestFixture {
   CPPUNIT_TEST(testSetters);
   CPPUNIT_TEST(testTasksGetter);
   CPPUNIT_TEST(testReadStates);
+  CPPUNIT_TEST(testReadTasks);
   CPPUNIT_TEST_SUITE_END();
 
  private:
@@ -106,6 +107,33 @@ class FixtureBfcPrototype : public CppUnit::TestFixture {
     CPPUNIT_ASSERT(ref[1].getDate() == Date(20150304));
     CPPUNIT_ASSERT(ref[1].getContent() == "~P3 + ~P5 ");
     CPPUNIT_ASSERT(t.getStatus() == 1);
+  }
+
+  /**    Test for BfcPrototype::readStates(istream, vector<Task>&)
+   *
+   */ 
+  void testReadTasks() {
+    std::vector<Task> ts;
+    bfc->readTasks(std::cin,ts);
+    // Input: "Book1 [ ~P2 ] 20150302 [ ~P3 + ~P5 ] 20150304 1"
+    //        "Book2 [ ~C1 ] 20150101 [ ~C3 ] 20150502 0"
+    std::vector<Task>& ref = ts;
+    std::vector<State>& ref0 = ts[0].getStates();
+    std::vector<State>& ref1 = ts[1].getStates();
+    CPPUNIT_ASSERT(ref[0].getTaskName() == "Book1");
+    CPPUNIT_ASSERT(ref0[0].getDate() == Date(20150302));
+    CPPUNIT_ASSERT(ref0[0].getContent() == "~P2 ");
+    CPPUNIT_ASSERT(ref0[1].getDate() == Date(20150304));
+    CPPUNIT_ASSERT(ref0[1].getContent() == "~P3 + ~P5 ");
+    CPPUNIT_ASSERT(ref[0].getStatus() == 1);
+    CPPUNIT_ASSERT(ref[1].getTaskName() == "Book2");
+    CPPUNIT_ASSERT(ref1[0].getDate() == Date(20150101));
+    CPPUNIT_ASSERT(ref1[0].getContent() == "~C1 ");
+    CPPUNIT_ASSERT(ref1[1].getDate() == Date(20150502));
+    CPPUNIT_ASSERT(ref1[1].getContent() == "~C3 ");
+    CPPUNIT_ASSERT(ref[1].getStatus() == 0);
+    CPPUNIT_ASSERT(bfc->getStartDate() == Date(20150101));
+    CPPUNIT_ASSERT(bfc->getEndDate() == Date(20150502));
   }
 
 };

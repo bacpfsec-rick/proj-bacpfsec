@@ -95,11 +95,7 @@ public:
    */
   virtual void readStates(std::istream& is, Task& bk);
 
-  /**    Virtual readTasks()
-   *
-   *     Get the record from stream and update the tasks and private members
-   */
-  virtual void readTasks(std::istream& is, std::vector<Task>& ts);
+
 
 private:
   /** Const limit of tasks in progress */

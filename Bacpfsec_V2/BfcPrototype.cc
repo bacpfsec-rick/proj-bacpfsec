@@ -107,3 +107,16 @@ void BfcPrototype::readStates(std::istream& is, Task& bk) {
     }
   }
 };
+
+void BfcPrototype::readTasks(std::istream& is, std::vector<Task>& ts) {
+  std::string s;
+  if (is>>s) {
+    Task newTask;
+    newTask.setTaskName(s);
+    readStates(is,newTask);
+    ts.push_back(newTask);
+    // recursively read next task
+    readTasks(is,ts);
+  }
+  recordLoaded = true;
+}
