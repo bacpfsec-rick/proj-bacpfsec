@@ -7,8 +7,8 @@ OBJECTS3 = Date.o State.o Task.o TestTask.o
 OBJECTS4 = Date.o Task.o State.o BfcPrototype.o TestBfcPrototype.o
 OBJECTS5 = Date.o Task.o State.o BfcPrototype.o BfcTUI.o TestBfcTUI.o
 OBJECTS6 = Date.o Task.o State.o BfcPrototype.o BfcTUI.o BfcTerminal.o BfcTR.o
-#all:   TestDate TestState TestTask TestBfcPrototype TestBfcTUI
-all: BfcTR
+
+all:   TestDate TestState TestTask TestBfcPrototype TestBfcTUI BfcTR
 
 TestDate: $(OBJECTS1)
 	g++ -std=c++0x -L $(LIBDIR) -o $@ $^ $(LNFLAGS)
@@ -37,3 +37,6 @@ clean:
 	rm TestDate
 	rm TestState
 	rm TestTask
+	rm TestBfcPrototype
+	rm TestBfcTUI
+	rm BfcTR

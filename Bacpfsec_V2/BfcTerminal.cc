@@ -50,7 +50,7 @@ bool BfcTerminal::instruct() {
       std::cout<<"   (0 : List the uncompleted tasks)"<<std::endl;
       std::cout<<"   (1 : List the finished tasks)"<<std::endl;
       std::cout<<"   (2 : List the cancelled tasks)"<<std::endl;
-      std::cout<<">>>"<<std::endl;
+      std::cout<<">>>";
       std::cin>>selector;
       showRecord(std::cout,ref,selector);
       break;
@@ -77,18 +77,18 @@ bool BfcTerminal::instruct() {
       std::cout<<"   (Select output destination)"<<std::endl;
       std::cout<<"   (0: Right here at terminal)"<<std::endl;
       std::cout<<"   (1: local TIMELINE.tl file)"<<std::endl;
-      std::cout<<">>>"<<std::endl;
+      std::cout<<">>>";
       std::cin>>destination;
       std::cout<<"   (Select output style)"<<std::endl;
       std::cout<<"   (0: Horizontal)"<<std::endl;
       std::cout<<"   (1: Vertical)"<<std::endl;
-      std::cout<<">>>"<<std::endl;
+      std::cout<<">>>";
       std::cin>>style;
       if (destination==0) {
 	timeline(std::cout,ref,Date(start),Date(end),style);
       } else {
 	std::ofstream ofs;
-	ofs.open("TIMELINE");
+	ofs.open("TIMELINE.tl");
 	timeline(ofs,ref,Date(start),Date(end),style);
 	ofs.close();
 	std::cout<<"   (TIMELINE.tl updated)"<<std::endl;

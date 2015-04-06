@@ -103,7 +103,6 @@ void BfcTUI::timeline(std::ostream& os, std::vector<Task>& ts,
       timelineHor(os,ts,s,e);
     }
   }
-
 }
 
 void BfcTUI::timelineVer(std::ostream& os, std::vector<Task>& ts,
@@ -154,6 +153,7 @@ void BfcTUI::timelineHor(std::ostream& os, std::vector<Task>& ts,
     printDay(os,Date(i),15);
     d.nextDate();
   }
+  os<<std::endl;
   // print title and states
   for (int k=0; k<ts.size(); k++) {
     os<<std::left<<std::setw(15)<<ts[k].getTaskName();
@@ -276,13 +276,6 @@ void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
     setNumOfTaskCancelled(getNumOfTaskCancelled()+1);
     os<<"   (Record updated)"<<std::endl;
   } else if (choice==3) {
-    bool merge;
-    os<<"   (Record for today already exists)"<<std::endl;
-    os<<"   (Type 1 to merge the progress)"<<std::endl;
-    os<<"   (Type 0 to overwrite the progress)"<<std::endl;
-    if (merge==0) {
-      t.getStates().pop_back();
-    }
     os<<"   (Progress Format)"<<std::endl;
     os<<"   (Detail in 20 chars / Date is auto recorded) "<<
       "--- eg. Chap2 "<<std::endl<<">>> ";
@@ -293,13 +286,24 @@ void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
     Date d((1900+today->tm_year)%100*10000
 	   +(1+today->tm_mon)*100+today->tm_mday);
     newState.setDate(d);
-    if (merge==0) {
-      t.getStates().push_back(newState);
+    bool duplicated = (d==t.getStates()[t.getStates().size()-1].getDate());
+    if (duplicated) {
+      bool merge;
+      os<<"   (Record for today already exists)"<<std::endl;
+      os<<"   (Type 1 to merge the progress)"<<std::endl;
+      os<<"   (Type 0 to overwrite the progress)"<<std::endl;
+      if (merge==0) {
+	t.getStates().pop_back();
+      }
+      if (merge==0) {
+	t.getStates().push_back(newState);
+      } else {
+	t.getStates()[t.getStates().size()-1].merge(newState);
+      }
     } else {
-      t.getStates()[t.getStates().size()-1].merge(newState);
+      t.getStates().push_back(newState);
     }
     os<<"   (Record updated but not saved yet)"<<std::endl;
-    working(os,is,t);
   } else {
     os<<"   ***Invalid choice***"<<std::endl;
     working(os,is,t);
