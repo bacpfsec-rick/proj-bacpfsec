@@ -92,4 +92,13 @@ V2.5.5:I&T BfcTUI Class		03e5a96		I&T horizontal timeline
 	   	  				Modify  BfcTUI.h
 							BfcTUI.cc
 							FixtureBfcTUI.h
+V2.5.6:I&T BfcTUI Class		cfb1300		I&T selectTask
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
 
+V2.5.7:I&T Impl Class		cfb1300		Impl selectAction & working
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							BfcPrototype.h
+							BfcPrototype.cc

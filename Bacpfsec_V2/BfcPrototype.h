@@ -33,6 +33,11 @@ class BfcPrototype {
    */ 
   ~BfcPrototype();
 
+  /**    Getter for maxTaskInProgress
+   *
+   */
+  const int getMaxTaskInProgress();
+
   /**    Setter for recordLoaded
    *
    */

@@ -76,7 +76,7 @@ class BfcTUI : public BfcPrototype {
   void timeline(std::ostream& os, std::vector<Task>& ts, 
 		Date s, Date e, bool m);
 
-  /**    timeline function with variant
+  /**    selectTask function select uncompleted task
    *     @param os        ostream
    *     @param is        istream
    *     @param ts        reference to a task vector
@@ -84,6 +84,24 @@ class BfcTUI : public BfcPrototype {
    *
    */
   int selectTask(std::ostream& os, std::istream& is, std::vector<Task>& ts);
+
+
+  /**    selectAction to select proper action basd on a task status
+   *     @param os        ostream
+   *     @param is        istream
+   *     @param ts        reference to a task vector
+   *
+   */
+  void selectAction(std::ostream& os, std::istream& is, std::vector<Task>& ts);
+
+
+  /**    working to perform proper action on a task
+   *     @param os        ostream
+   *     @param is        istream
+   *     @param t         reference to a task
+   *
+   */
+  void working(std::ostream& os, std::istream& is, Task& t);
 
  private:
   /**    Private helper to build vertical timeline

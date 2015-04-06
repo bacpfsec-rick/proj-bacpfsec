@@ -16,6 +16,10 @@ BfcPrototype::~BfcPrototype() {
   init();
 }
 
+const int BfcPrototype::getMaxTaskInProgress() {
+  return maxTaskInProgress;
+}
+
 void BfcPrototype::setRecordLoaded(bool rl) {
   recordLoaded = rl;
 }

@@ -9,6 +9,7 @@
 #include "BfcTUI.h"
 #include <sstream>
 #include <iomanip>
+#include <time.h>
 
 BfcTUI::BfcTUI() {
   BfcPrototype::init();
@@ -193,4 +194,114 @@ int BfcTUI::selectTask(std::ostream& os, std::istream& is,
     selectTask(os,is,ts);
   }
   return choice-1;
+}
+
+
+void BfcTUI::selectAction(std::ostream& os, std::istream& is,
+			  std::vector<Task>& ts) {
+  os<<"   (0-Back) "<<
+    ((getNumOfTaskUncomplete() == 0) ? "" : "(1-Continue uncompleted work) ")<<
+    ((getNumOfTaskUncomplete() < getMaxTaskInProgress()) ? 
+     "(2-Start new work)" : "")<<std::endl;
+  int choice;
+  os<<">>> ";
+  is>>choice;
+  if (choice==0) {
+    return;
+  } else if (choice==1) {
+    if (getNumOfTaskUncomplete() == 0) {
+      os<<"   ***Invalid choice***"<<std::endl;
+      selectAction(os,is,ts);
+    } else {
+      os<<"   (Select an work)"<<std::endl;
+      int choice = selectTask(os,is,ts);
+      os<<"   (Work on "<<ts[choice].getTaskName()<<")"<<std::endl;
+      working(os,is,ts[choice]);
+    }
+  } else if (choice==2) {
+    if (getNumOfTaskUncomplete() < getMaxTaskInProgress()) {
+      Task newTask;
+      os<<"   (Name Format)"<<std::endl;
+      os<<"   (Less than 10 char) --- eg. Sample_task1"<<std::endl<<">>> ";
+      std::string name;
+      is>>name;
+      newTask.setTaskName(name);
+      newTask.setStatus(0);
+      ts.push_back(newTask);
+      setNumOfTaskUncomplete(getNumOfTaskUncomplete()+1);
+      os<<"   (Work on "<<newTask.getTaskName()<<")"<<std::endl;
+      working(os,is,ts[ts.size()-1]);
+    } else {
+      os<<"   ***Reach the parallel limit***"<<std::endl;
+      selectAction(os,is,ts); 
+    }
+  } else {
+    os<<"   ***Invalid choice***"<<std::endl;
+    selectAction(os,is,ts);
+  }
+}
+
+void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
+  os<<"   (0-Back) (1-Finish it) (2-Cancel it) (3-Update a new progress)"
+    <<std::endl<<">>> ";
+  int choice;
+  is>>choice;
+  std::time_t tm;
+  time(&tm);
+  struct tm* today = localtime(&tm);
+  if (choice==0) {
+    os<<"   (Nothing happened)"<<std::endl;
+    return;
+  } else if (choice==1) {
+    State finishState;
+    finishState.setContent("FINISH");
+    Date d((1900+today->tm_year)%100*10000
+	      +(1+today->tm_mon)*100+today->tm_mday);
+    d.nextDate(); // FINISH is marked at the next day
+    finishState.setDate(d);
+    t.getStates().push_back(finishState);
+    t.setStatus(1);
+    setNumOfTaskUncomplete(getNumOfTaskUncomplete()-1);
+    os<<"   (Record updated)"<<std::endl;
+  } else if (choice==2) {
+    State cancelState;
+    cancelState.setContent("CANCEL");
+    Date d((1900+today->tm_year)%100*10000
+	   +(1+today->tm_mon)*100+today->tm_mday);
+    d.nextDate(); // FINISH is marked at the next day
+    cancelState.setDate(d);
+    t.getStates().push_back(cancelState);
+    t.setStatus(2);
+    setNumOfTaskUncomplete(getNumOfTaskUncomplete()-1);
+    setNumOfTaskCancelled(getNumOfTaskCancelled()+1);
+    os<<"   (Record updated)"<<std::endl;
+  } else if (choice==3) {
+    bool merge;
+    os<<"   (Record for today already exists)"<<std::endl;
+    os<<"   (Type 1 to merge the progress)"<<std::endl;
+    os<<"   (Type 0 to overwrite the progress)"<<std::endl;
+    if (merge==0) {
+      t.getStates().pop_back();
+    }
+    os<<"   (Progress Format)"<<std::endl;
+    os<<"   (Detail in 20 chars / Date is auto recorded) "<<
+      "--- eg. Chap2 "<<std::endl<<">>> ";
+    std::string content;
+    is>>content;
+    State newState;
+    newState.setContent(content);
+    Date d((1900+today->tm_year)%100*10000
+	   +(1+today->tm_mon)*100+today->tm_mday);
+    newState.setDate(d);
+    if (merge==0) {
+      t.getStates().push_back(newState);
+    } else {
+      t.getStates()[t.getStates().size()-1].merge(newState);
+    }
+    os<<"   (Record updated but not saved yet)"<<std::endl;
+    working(os,is,t);
+  } else {
+    os<<"   ***Invalid choice***"<<std::endl;
+    working(os,is,t);
+  }
 }
