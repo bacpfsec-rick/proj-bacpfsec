@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module Date-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="129" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="38" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="54" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="2.389" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.704" level="0" />
+<weighted_methods_per_class_unity value="10" level="0" />
+<weighted_methods_per_class_visibility value="9" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="4" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+<description>definition</description>
+<source_reference file="Date.h" line="21" />
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="14" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>Date()</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="10" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="26" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="10" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>Date(const Date &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="21" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="36" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>Date(int)</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="14" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="31" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getValue()</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="36" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="51" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>isValid()</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="94" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="76" />
+</extent>
+<lines_of_code value="35" level="1" />
+<McCabes_cyclomatic_complexity value="19" level="1" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="8.750" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="4.750" level="0" />
+</member_function>
+<member_function>
+<name>nextDate()</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="40" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="56" />
+</extent>
+<lines_of_code value="53" level="1" />
+<McCabes_cyclomatic_complexity value="14" level="1" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="13.250" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="3.500" level="0" />
+</member_function>
+<member_function>
+<name>operator !=(Date)</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="133" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="66" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>operator ==(Date)</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="129" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="61" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setValue(int)</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="29" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="46" />
+</extent>
+<lines_of_code value="7" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~Date()</name>
+<extent>
+<description>definition</description>
+<source_reference file="Date.cc" line="25" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="Date.h" line="41" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>Date</name>
+<client_module>
+<name>BfcPrototype</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="BfcPrototype.cc" line="27" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="BfcPrototype.cc" line="35" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="BfcPrototype.h" line="49" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="BfcPrototype.h" line="59" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="BfcPrototype.h" line="112" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="BfcPrototype.h" line="115" />
+</extent>
+<name>BfcTUI</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.cc" line="21" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.cc" line="81" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.cc" line="81" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.cc" line="109" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.cc" line="109" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.cc" line="147" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.cc" line="147" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.h" line="44" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.h" line="77" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.h" line="77" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.h" line="87" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.h" line="87" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.h" line="96" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="BfcTUI.h" line="96" />
+</extent>
+<name>FixtureDate</name>
+<visible>false</visible>
+<concrete>false</concrete>
+<extent>
+<description>has by reference</description>
+<source_reference file="FixtureDate.h" line="33" />
+</extent>
+<name>State</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="State.cc" line="16" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="State.cc" line="29" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="State.h" line="34" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="State.h" line="49" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="State.h" line="82" />
+</extent>
+</client_module>
+<supplier_module>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>
