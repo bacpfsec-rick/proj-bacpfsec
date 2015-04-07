@@ -114,6 +114,6 @@ V2.6.1:Impl BfcTerminal Class	51baeee		Impl run() based on polymorphisam
 							BfcPrototype.cc
 V2.7.0:Impl BfcTR.cc		2cab18b		Build the terminal-based executable
 	    					Add     BfcTR.cc
-V2.7.1:Debug BfcTR.cc				Run and debug the executable
+V2.7.1:Debug BfcTR.cc		85512c7		Run and debug the executable
 	     					Modify	BfcTR.cc
 							BfcTUI.cc
