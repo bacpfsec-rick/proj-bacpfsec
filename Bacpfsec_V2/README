@@ -139,4 +139,4 @@ V3.1.0:Iml BfsTRI & BfcTRII     264c5fc         Build several factories
 							BfcTUI.cc
 							BfcTerminal.h
 							BfcTerminal.cc
-V3.2.0:Debug & Establish                        Bacpfsec is now on rails!
+V3.2.0:Debug & Establish	6d84168         Bacpfsec is now on rails!
