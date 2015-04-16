@@ -15,11 +15,13 @@
 BfcTUI::BfcTUI(Setup f) {
   factory = f;
   tl = factory->createTimeline();
+  menu = factory->createMenu();
 }
 
 BfcTUI::~BfcTUI() {
   BfcPrototype::init();
   delete tl;
+  delete menu;
   delete factory;
 }
 
@@ -76,7 +78,7 @@ void BfcTUI::briefReport(std::ostream& os, std::vector<Task>& ts) {
 }
 
 void BfcTUI::timeline(std::ostream& os, std::vector<Task>& ts,
-		      Date s, Date e) {//, bool m) {
+		      Date s, Date e) {
   int sdValue = getStartDate().getValue(),
     edValue = getEndDate().getValue(),
     sValue = s.getValue(), eValue = e.getValue();
@@ -94,86 +96,11 @@ void BfcTUI::timeline(std::ostream& os, std::vector<Task>& ts,
       (edYear==sYear && edMon==sMon && edDay<sDay) ) {
     os<<"   ***Nothing done in given period***"<<std::endl;
   } else {
-    /*
-    if (m) {
-      timelineVer(os,ts,s,e);
-    } else {
-      timelineHor(os,ts,s,e);
-    }
-    */
     tl->timeline(os,ts,s,e,getStartDate(),getEndDate());
   }
 }
 
-/*
-void BfcTUI::timelineVer(std::ostream& os, std::vector<Task>& ts,
-			 Date s, Date e) {
-  // print title
-  os<<std::left<<std::setw(15)<<"Date\\Task";
-  for (int i=0; i<ts.size(); ++i) {
-    os<<std::left<<std::setw(15)<<ts[i].getTaskName();
-  }
-  os<<std::endl;
-  // keep track
-  int track[ts.size()];
-  for(int i=0; i<ts.size(); ++i) {
-    track[i]=0;
-  }
-  // print states
-  int last = (getEndDate().getValue()>e.getValue()) ? e.getValue() : getEndDate().getValue();
-  for(int i=s.getValue(); i<=last; i=s.getValue()) {
-    printDay(os,Date(i),15);
-    for(int j=0; j<ts.size(); ++j) {
-      if (ts[j].getStates()[ts[j].getStates().size()-1].getDate().getValue()<i) {
-	os<<std::setw(15)<<"";
-	continue;
-      }
-      while( ts[j].getStates()[track[j]].getDate().getValue()<i) {
-	++track[j];
-      }
-      if (ts[j].getStates()[track[j]].getDate().getValue()==i) {
-	os<<std::left<<std::setw(15)<<
-	  ts[j].getStates()[track[j]].getContent();
-	++track[j];
-      } else {
-	os<<std::setw(15)<<"";
-      }
-    }
-    os<<std::endl;
-    s.nextDate();
-  }
-}
-
-void BfcTUI::timelineHor(std::ostream& os, std::vector<Task>& ts,
-			 Date s, Date e) {
-  // print title and date
-  os<<std::left<<std::setw(15)<<"Task\\Date";
-  int last = (getEndDate().getValue()>e.getValue()) ? e.getValue() : getEndDate().getValue();
-  Date d(s);
-  for (int i=d.getValue(); i<=last; i=d.getValue()) {
-    printDay(os,Date(i),15);
-    d.nextDate();
-  }
-  os<<std::endl;
-  // print title and states
-  for (int k=0; k<ts.size(); k++) {
-    os<<std::left<<std::setw(15)<<ts[k].getTaskName();
-    d = s;
-    int curr = 0;
-    for(int i=d.getValue(); i<=last; i=d.getValue()) {
-      if (Date(i)==ts[k].getStates()[curr].getDate()) {
-	os<<std::left<<std::setw(15)<<ts[k].getStates()[curr].getContent();
-	curr++;
-      } else {
-	os<<std::setw(15)<<"";
-      }
-      d.nextDate();
-    }
-    os<<std::endl;
-  }
-}
-*/
-    
+   
 int BfcTUI::selectTask(std::ostream& os, std::istream& is,
 		       std::vector<Task>& ts) {
  os<<"   (0-Random)";
@@ -309,6 +236,10 @@ void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
     os<<"   ***Invalid choice***"<<std::endl;
     working(os,is,t);
   }
+}
+
+void BfcTUI::welcome(std::ostream& os) {
+  menu->welcome(os);
 }
 
 void BfcTUI::run() {

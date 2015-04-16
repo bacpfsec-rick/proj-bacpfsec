@@ -8,8 +8,10 @@
  */
 #ifndef _SETUPI_H_
 #define _SETUPI_H_
-#include "TimelineVer.h"
 #include "Setup.h"
+#include "TimelineVer.h"
+#include "MenuDetail.h"
+
 /**
  * @brief  SetupI is a concrete factory
  * 
@@ -17,15 +19,17 @@
  *
  */
 class SetupI: public SetupInterface {
-public:
+ public:
   /** Abstract setup for timeline
    *
    */
   Timeline createTimeline() {
     return new TimelineVer;
   }
-
-
+  
+  Menu createMenu() {
+    return new MenuDetail;
+  }
 };
 
 #endif

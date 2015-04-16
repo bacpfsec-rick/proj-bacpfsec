@@ -6,11 +6,11 @@ OBJECTS2 = Date.o State.o TestState.o
 OBJECTS3 = Date.o State.o Task.o TestTask.o
 OBJECTS4 = Date.o Task.o State.o BfcPrototype.o TestBfcPrototype.o
 OBJECTS5 = Date.o Task.o State.o BfcPrototype.o BfcTUI.o TestBfcTUI.o
-OBJECTS6 = Date.o Task.o State.o TimelineVer.o TimelineHor.o BfcPrototype.o BfcTUI.o BfcTerminal.o BfcTRI.o
-OBJECTS7 = Date.o Task.o State.o TimelineVer.o TimelineHor.o BfcPrototype.o BfcTUI.o BfcTerminal.o BfcTRII.o
+OBJECTS6 = Date.o Task.o State.o TimelineVer.o MenuDetail.o BfcPrototype.o BfcTUI.o BfcTerminal.o BfcTRI.o
+OBJECTS7 = Date.o Task.o State.o TimelineHor.o MenuSimple.o BfcPrototype.o BfcTUI.o BfcTerminal.o BfcTRII.o
 
 #all:   TestDate TestState TestTask TestBfcPrototype TestBfcTUI BfcTR
-all: BfcTRI
+all: BfcTRI BfcTRII
 
 TestDate: $(OBJECTS1)
 	g++ -std=c++0x -L $(LIBDIR) -o $@ $^ $(LNFLAGS)
@@ -45,3 +45,4 @@ clean:
 #	rm TestBfcPrototype
 #	rm TestBfcTUI
 	rm BfcTRI
+	rm BfcTRII

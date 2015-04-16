@@ -8,14 +8,10 @@
  */
 #ifndef _SETUPII_H_
 #define _SETUPII_H_
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <iomanip>
-#include "Date.h"
-#include "Task.h"
-#include "TimelineHor.h"
 #include "Setup.h"
+#include "TimelineHor.h"
+#include "MenuSimple.h"
+
 /**
  * @brief  SetupII is a concrete factory
  * 
@@ -23,15 +19,17 @@
  *
  */
 class SetupII: public SetupInterface {
-public:
+ public:
   /** Abstract setup for timeline
    *
    */
   Timeline createTimeline() {
     return new TimelineHor;
   }
-
-
+  
+  Menu createMenu() {
+    return new MenuSimple;
+  }
 };
 
 #endif

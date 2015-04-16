@@ -16,6 +16,7 @@
 #include "BfcPrototype.h"
 #include "Timeline.h"
 #include "Setup.h"
+#include "Menu.h"
 #include <vector>
 
 /**
@@ -97,6 +98,11 @@ class BfcTUI : public BfcPrototype {
    */
   void working(std::ostream& os, std::istream& is, Task& t);
 
+  /**    welcome the user
+   *     @param os        ostream
+   */
+  void welcome(std::ostream&os);
+
   /**    Virtual run()
    *
    *     Implemented through inheritence
@@ -104,26 +110,13 @@ class BfcTUI : public BfcPrototype {
   virtual void run();
 
  private:
-  /**    Private helper to build vertical timeline
-   *     @param os        ostream
-   *     @param ts        reference to a task vector
-   *     @param s         start Date input from user
-   *     @param e         end Date input from user
-   *
-   */
-  //  void timelineVer(std::ostream& os, std::vector<Task>& ts, Date s, Date e);
-
-  /**    Private helper to build horizontal timeline
-   *     @param os        ostream
-   *     @param ts        reference to a task vector
-   *     @param s         start Date input from user
-   *     @param e         end Date input from user
-   *
-   */
-  //  void timelineHor(std::ostream& os, std::vector<Task>& ts, Date s, Date e);
-
   /** Private pointer to timeline interface */
   Timeline tl;
+
+  /** Private pointer to menu interface */
+  Menu menu;
+
+  /** Private pointer to the setup factory */
   Setup factory;
 };
 #endif

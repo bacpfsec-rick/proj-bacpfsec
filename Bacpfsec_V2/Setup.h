@@ -15,6 +15,7 @@
 #include "Date.h"
 #include "Task.h"
 #include "Timeline.h"
+#include "Menu.h"
 
 /**
  * @brief  Setup interface is the abstract factory
@@ -29,7 +30,10 @@ public:
    */
   virtual Timeline createTimeline() = 0;
 
-
+  /** Abstract setup for menu
+   *
+   */
+  virtual Menu createMenu() = 0;
 };
 typedef SetupInterface* Setup;
 #endif

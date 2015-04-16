@@ -98,8 +98,8 @@ bool BfcTerminal::instruct() {
 	timeline(ofs,ref,Date(start),Date(end));//,style);
 	ofs.close();
 	std::cout<<"   (TIMELINE.tl updated)"<<std::endl;
-	break;
       }
+      break;
     }
   case '1':
     {
@@ -121,9 +121,7 @@ bool BfcTerminal::instruct() {
 
 void BfcTerminal::run() {
   srand(time(NULL));
-  std::cout<<"-------------------------"<<std::endl;
-  std::cout<<"|  Welcome to BacpFecE  |"<<std::endl;
-  std::cout<<"-------------------------"<<std::endl;
+  welcome(std::cout);
   while (instruct()) {
     std::cout<<">>> "<<std::endl;
   }
