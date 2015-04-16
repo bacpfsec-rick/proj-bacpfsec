@@ -117,3 +117,4 @@ V2.7.0:Impl BfcTR.cc		2cab18b		Build the terminal-based executable
 V2.7.1:Debug BfcTR.cc		85512c7		Run and debug the executable
 	     					Modify	BfcTR.cc
 							BfcTUI.cc
+V3.0.0:Begin Refactor                           Set up for the factor refactor
