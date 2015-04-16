@@ -14,6 +14,8 @@
 #include "Date.h"
 #include "Task.h"
 #include "BfcPrototype.h"
+#include "Timeline.h"
+#include "Setup.h"
 #include <vector>
 
 /**
@@ -25,23 +27,15 @@
  */
 class BfcTUI : public BfcPrototype {
  public:
-  /**    Default constructor
-   *     
-   */ 
-  BfcTUI();
-  
+  /**    Constructor with factory 
+   *
+   */
+  BfcTUI(Setup f);
+
   /**    Destructor
    *
    */ 
   ~BfcTUI();
-
-  /**    Print given date with given width
-   *     @param os        ostream
-   *     @param d         a Date object
-   *     @param witth     desired output width
-   *
-   */
-  void printDay(std::ostream& os, Date d, int width);
 
   /**    showRecord to ostream
    *     @param os        ostream
@@ -74,7 +68,7 @@ class BfcTUI : public BfcPrototype {
    *
    */
   void timeline(std::ostream& os, std::vector<Task>& ts, 
-		Date s, Date e, bool m);
+		Date s, Date e);
 
   /**    selectTask function select uncompleted task
    *     @param os        ostream
@@ -117,7 +111,7 @@ class BfcTUI : public BfcPrototype {
    *     @param e         end Date input from user
    *
    */
-  void timelineVer(std::ostream& os, std::vector<Task>& ts, Date s, Date e);
+  //  void timelineVer(std::ostream& os, std::vector<Task>& ts, Date s, Date e);
 
   /**    Private helper to build horizontal timeline
    *     @param os        ostream
@@ -126,7 +120,10 @@ class BfcTUI : public BfcPrototype {
    *     @param e         end Date input from user
    *
    */
-  void timelineHor(std::ostream& os, std::vector<Task>& ts, Date s, Date e);
+  //  void timelineHor(std::ostream& os, std::vector<Task>& ts, Date s, Date e);
 
+  /** Private pointer to timeline interface */
+  Timeline tl;
+  Setup factory;
 };
 #endif

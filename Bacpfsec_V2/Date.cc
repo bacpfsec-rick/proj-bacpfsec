@@ -133,3 +133,12 @@ bool Date::operator==(Date d){
 bool Date::operator!=(Date d){
   return date!=d.getValue();
 }
+
+void Date::printDay(std::ostream& os, Date d, int width) {
+  std::stringstream ss;
+  int time = d.getValue();
+  ss<<(time/10000)<<"-"<<(time/100%100)<<"-"<<(time%100);
+  std::string t;
+  ss>>t;
+  os<<std::left<<std::setw(width)<<t;
+}

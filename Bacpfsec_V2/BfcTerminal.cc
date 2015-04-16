@@ -11,6 +11,10 @@
 #include <time.h>
 #include <fstream>
 
+BfcTerminal::BfcTerminal(Setup f) : BfcTUI(f) {
+
+}
+
 bool BfcTerminal::instruct() {
   std::vector<Task>& ref = getTasks();
   char i;
@@ -73,23 +77,25 @@ bool BfcTerminal::instruct() {
       std::cout<<"   (20150101 20151231 for eg.)"<<std::endl<<">>> ";
       std::cin>>start>>end;
       std::cout<<"   (Timeline from "<<start<<"~"<<end<<")"<<std::endl;
-      bool destination, style;
+      bool destination;//, style;
       std::cout<<"   (Select output destination)"<<std::endl;
       std::cout<<"   (0: Right here at terminal)"<<std::endl;
       std::cout<<"   (1: local TIMELINE.tl file)"<<std::endl;
       std::cout<<">>>";
       std::cin>>destination;
+      /*
       std::cout<<"   (Select output style)"<<std::endl;
       std::cout<<"   (0: Horizontal)"<<std::endl;
       std::cout<<"   (1: Vertical)"<<std::endl;
       std::cout<<">>>";
       std::cin>>style;
+      */
       if (destination==0) {
-	timeline(std::cout,ref,Date(start),Date(end),style);
+	timeline(std::cout,ref,Date(start),Date(end));//,style);
       } else {
 	std::ofstream ofs;
 	ofs.open("TIMELINE.tl");
-	timeline(ofs,ref,Date(start),Date(end),style);
+	timeline(ofs,ref,Date(start),Date(end));//,style);
 	ofs.close();
 	std::cout<<"   (TIMELINE.tl updated)"<<std::endl;
 	break;

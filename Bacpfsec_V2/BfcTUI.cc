@@ -11,22 +11,19 @@
 #include <iomanip>
 #include <time.h>
 #include <fstream>
-BfcTUI::BfcTUI() {
-  BfcPrototype::init();
+
+BfcTUI::BfcTUI(Setup f) {
+  factory = f;
+  tl = factory->createTimeline();
 }
 
 BfcTUI::~BfcTUI() {
   BfcPrototype::init();
+  delete tl;
+  delete factory;
 }
 
-void BfcTUI::printDay(std::ostream& os, Date d, int width) {
-  std::stringstream ss;
-  int time = d.getValue();
-  ss<<(time/10000)<<"-"<<(time/100%100)<<"-"<<(time%100);
-  std::string t;
-  ss>>t;
-  os<<std::left<<std::setw(width)<<t;
-}
+
 
 void BfcTUI::showRecord(std::ostream& os, std::vector<Task>& ts, int s) {
   for(int i=0; i<ts.size(); ++i) {
@@ -45,7 +42,7 @@ void BfcTUI::showRecord(std::ostream& os, std::vector<Task>& ts, int s) {
 	if (date.getValue()/10%10==0) {   // XXXX0X
 	  --width;
 	}
-	printDay(os,date,width);
+	Date::printDay(os,date,width);
 	os<<std::left<<std::setw(18-content.size()-2-width);
       }
       os<<std::endl;
@@ -79,7 +76,7 @@ void BfcTUI::briefReport(std::ostream& os, std::vector<Task>& ts) {
 }
 
 void BfcTUI::timeline(std::ostream& os, std::vector<Task>& ts,
-		      Date s, Date e, bool m) {
+		      Date s, Date e) {//, bool m) {
   int sdValue = getStartDate().getValue(),
     edValue = getEndDate().getValue(),
     sValue = s.getValue(), eValue = e.getValue();
@@ -97,14 +94,18 @@ void BfcTUI::timeline(std::ostream& os, std::vector<Task>& ts,
       (edYear==sYear && edMon==sMon && edDay<sDay) ) {
     os<<"   ***Nothing done in given period***"<<std::endl;
   } else {
+    /*
     if (m) {
       timelineVer(os,ts,s,e);
     } else {
       timelineHor(os,ts,s,e);
     }
+    */
+    tl->timeline(os,ts,s,e,getStartDate(),getEndDate());
   }
 }
 
+/*
 void BfcTUI::timelineVer(std::ostream& os, std::vector<Task>& ts,
 			 Date s, Date e) {
   // print title
@@ -171,7 +172,7 @@ void BfcTUI::timelineHor(std::ostream& os, std::vector<Task>& ts,
     os<<std::endl;
   }
 }
-
+*/
     
 int BfcTUI::selectTask(std::ostream& os, std::istream& is,
 		       std::vector<Task>& ts) {

@@ -16,10 +16,17 @@
 #include "Task.h"
 #include "BfcPrototype.h"
 #include "BfcTUI.h"
+#include "Setup.h"
 #include <vector>
 
 class BfcTerminal : public BfcTUI {
  public:
+  /** Constructor with factory
+   *
+   *     @param   f is a factory
+   */
+  BfcTerminal(Setup f);
+
   /**    instruct to dictate instructions
    *     @return          boolean as valid instruction
    *

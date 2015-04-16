@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 
 /**
  * @brief  Date Class is used for time recording
@@ -64,6 +66,14 @@ public:
    *     %param d    another date
    */
   bool operator!=(Date d);
+
+  /**    Class method to print given date with given width
+   *     @param os        ostream
+   *     @param d         a Date object
+   *     @param witth     desired output width
+   *
+   */
+  static void printDay(std::ostream& os, Date d, int width);
 
 private:
   /** Storage of date value */ 
