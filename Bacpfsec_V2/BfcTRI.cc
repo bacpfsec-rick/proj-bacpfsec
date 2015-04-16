@@ -13,9 +13,10 @@
 #include "SetupI.h"
 
 int main() {
-  BfcPrototype* bfc;
-  bfc = new BfcTerminal(new SetupI);
-  bfc->run();
-  delete bfc;
+  BfcTerminal bfc(new SetupI);
+  bfc.run();
+
+
+  return 0;
 }; 
 

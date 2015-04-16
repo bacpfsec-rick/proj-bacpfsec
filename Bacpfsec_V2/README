@@ -118,3 +118,25 @@ V2.7.1:Debug BfcTR.cc		85512c7		Run and debug the executable
 	     					Modify	BfcTR.cc
 							BfcTUI.cc
 V3.0.0:Begin Refactor           8c38dcb         Set up for the factor refactor
+V3.1.0:Iml BfsTRI & BfcTRII     264c5fc         Build several factories
+	   	    				Add     Menu.h
+							MenuSimple.h
+							MenuSimple.cc
+							MenuDetail.h
+							MenuDetail.cc
+							Timeline.h
+							TimelineVer.h
+							TimelineVer.cc
+							TimelineHor.h
+							TimelineVec.cc
+							Setup.h
+							SteupI.h
+							BfcTRI.cc
+							SteupII.h
+							BfcTRII.cc
+						Remove	BfcTR.cc
+						Modify	BfcTUI.h
+							BfcTUI.cc
+							BfcTerminal.h
+							BfcTerminal.cc
+V3.2.0:Debug & Establish                        Bacpfsec is now on rails!

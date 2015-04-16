@@ -109,9 +109,13 @@ int BfcTUI::selectTask(std::ostream& os, std::istream& is,
       os<<" ("<<i+1<<"-"<<ts[i].getTaskName()<<")";
     }
   }
-  os<<std::endl<<">>> ";
+  os<<std::endl;
   int choice;
-  is>>choice;
+  while ( os<<">>> " && !(is>>choice)) { // invalid input handling
+      is.clear();
+      is.ignore(1024, '\n');
+      os <<"   ***Invalid input, please re-enter***"<<std::endl;
+  }
   if (choice==0) {
     do {
       choice = rand()%ts.size();
@@ -127,13 +131,14 @@ int BfcTUI::selectTask(std::ostream& os, std::istream& is,
 
 void BfcTUI::selectAction(std::ostream& os, std::istream& is,
 			  std::vector<Task>& ts) {
-  os<<"   (0-Back) "<<
-    ((getNumOfTaskUncomplete() == 0) ? "" : "(1-Continue uncompleted work) ")<<
-    ((getNumOfTaskUncomplete() < getMaxTaskInProgress()) ? 
-     "(2-Start new work)" : "")<<std::endl;
+  os<<"   (0-Back) "<<((getNumOfTaskUncomplete() == 0) ? "" : "(1-Continue uncompleted work) ")<<
+    ((getNumOfTaskUncomplete() < getMaxTaskInProgress()) ? "(2-Start new work)" : "")<<std::endl;
   int choice;
-  os<<">>> ";
-  is>>choice;
+  while ( os<<">>> " && !(is>>choice)) { // invalid input handling
+      is.clear();
+      is.ignore(1024, '\n');
+      os <<"   ***Invalid input, please re-enter***"<<std::endl;
+  }
   if (choice==0) {
     return;
   } else if (choice==1) {
@@ -155,6 +160,15 @@ void BfcTUI::selectAction(std::ostream& os, std::istream& is,
       is>>name;
       newTask.setTaskName(name);
       newTask.setStatus(0);
+      State startState;
+      startState.setContent("START");
+      std::time_t tm;
+      time(&tm);
+      struct tm* today = localtime(&tm);
+      Date d((1900+today->tm_year)*10000
+	     +(1+today->tm_mon)*100+today->tm_mday);
+      startState.setDate(d);
+      newTask.getStates().push_back(startState);
       ts.push_back(newTask);
       setNumOfTaskUncomplete(getNumOfTaskUncomplete()+1);
       os<<"   (Work on "<<newTask.getTaskName()<<")"<<std::endl;
@@ -171,9 +185,13 @@ void BfcTUI::selectAction(std::ostream& os, std::istream& is,
 
 void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
   os<<"   (0-Back) (1-Finish it) (2-Cancel it) (3-Update a new progress)"
-    <<std::endl<<">>> ";
+    <<std::endl;
   int choice;
-  is>>choice;
+  while ( os<<">>> " && !(is>>choice)) { // invalid input handling
+      is.clear();
+      is.ignore(1024, '\n');
+      os <<"   ***Invalid input, please re-enter***"<<std::endl;
+  }
   std::time_t tm;
   time(&tm);
   struct tm* today = localtime(&tm);
@@ -183,7 +201,7 @@ void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
   } else if (choice==1) {
     State finishState;
     finishState.setContent("FINISH");
-    Date d((1900+today->tm_year)%100*10000
+    Date d((1900+today->tm_year)*10000
 	      +(1+today->tm_mon)*100+today->tm_mday);
     d.nextDate(); // FINISH is marked at the next day
     finishState.setDate(d);
@@ -194,7 +212,7 @@ void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
   } else if (choice==2) {
     State cancelState;
     cancelState.setContent("CANCEL");
-    Date d((1900+today->tm_year)%100*10000
+    Date d((1900+today->tm_year)*10000
 	   +(1+today->tm_mon)*100+today->tm_mday);
     d.nextDate(); // FINISH is marked at the next day
     cancelState.setDate(d);
@@ -211,7 +229,7 @@ void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
     is>>content;
     State newState;
     newState.setContent(content);
-    Date d((1900+today->tm_year)%100*10000
+    Date d((1900+today->tm_year)*10000
 	   +(1+today->tm_mon)*100+today->tm_mday);
     newState.setDate(d);
     bool duplicated = (d==t.getStates()[t.getStates().size()-1].getDate());
@@ -220,6 +238,8 @@ void BfcTUI::working(std::ostream& os, std::istream& is, Task& t) {
       os<<"   (Record for today already exists)"<<std::endl;
       os<<"   (Type 1 to merge the progress)"<<std::endl;
       os<<"   (Type 0 to overwrite the progress)"<<std::endl;
+      os<<">>> ";
+      is>>merge;
       if (merge==0) {
 	t.getStates().pop_back();
       }

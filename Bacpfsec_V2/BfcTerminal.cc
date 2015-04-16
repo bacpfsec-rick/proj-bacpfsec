@@ -17,7 +17,6 @@ BfcTerminal::BfcTerminal(Setup f) : BfcTUI(f) {
 
 bool BfcTerminal::instruct() {
   std::vector<Task>& ref = getTasks();
-  char i;
   std::cout<<"   ";
   std::cout<<(getRecordLoaded() ? "" : "(1-Load) ");
   std::cout<<(getRecordLoaded() ? "(1-Rec Info) " : "");
@@ -25,8 +24,13 @@ bool BfcTerminal::instruct() {
   std::cout<<(getRecordLoaded() ? "(3-WORK NOW) " : "");
   std::cout<<(getRecordLoaded() ? "(4-Timeline) " : "");
   std::cout<<(getRecordLoaded() ? "(5-Save rec) " : "");
-  std::cout<<"(8-Quit) "<<std::endl<<">>> ";
-  std::cin>>i;
+  std::cout<<"(8-Quit) "<<std::endl;
+  char i;
+  while ( std::cout<<">>> " && !(std::cin>>i)) {
+    std::cin.clear();
+    std::cin.ignore(1024, '\n');
+    std::cout<<"   ***Invalid input, please re-enter***"<<std::endl;
+  }
   // Menu when record unloaded
   if (!getRecordLoaded()) {
     switch(i) {
@@ -54,8 +58,9 @@ bool BfcTerminal::instruct() {
       std::cout<<"   (0 : List the uncompleted tasks)"<<std::endl;
       std::cout<<"   (1 : List the finished tasks)"<<std::endl;
       std::cout<<"   (2 : List the cancelled tasks)"<<std::endl;
-      std::cout<<">>>";
+      std::cout<<">>> ";
       std::cin>>selector;
+      std::cout<<"   (Record Listing)"<<std::endl;
       showRecord(std::cout,ref,selector);
       break;
     }
@@ -74,22 +79,23 @@ bool BfcTerminal::instruct() {
       int start,end;
       std::cout<<"   (Input 2 valid date)"<<std::endl;
       std::cout<<"   (YYYYMMDD YYYYMMDD)"<<std::endl;
-      std::cout<<"   (20150101 20151231 for eg.)"<<std::endl<<">>> ";
-      std::cin>>start>>end;
+      std::cout<<"   (20150101 20151231 for eg.)"<<std::endl;
+      while ( std::cout<<std::endl<<">>> " && 
+	      !(std::cin>>start && std::cin>>end)) {
+	std::cin.clear();
+	std::cin.ignore(1024, '\n');
+	std::cout<<"   ***Invalid input, please re-enter***"<<std::endl;
+      }
       std::cout<<"   (Timeline from "<<start<<"~"<<end<<")"<<std::endl;
-      bool destination;//, style;
+      bool destination;
       std::cout<<"   (Select output destination)"<<std::endl;
       std::cout<<"   (0: Right here at terminal)"<<std::endl;
       std::cout<<"   (1: local TIMELINE.tl file)"<<std::endl;
-      std::cout<<">>>";
-      std::cin>>destination;
-      /*
-      std::cout<<"   (Select output style)"<<std::endl;
-      std::cout<<"   (0: Horizontal)"<<std::endl;
-      std::cout<<"   (1: Vertical)"<<std::endl;
-      std::cout<<">>>";
-      std::cin>>style;
-      */
+      while ( std::cout<<">>> " && !(std::cin>>destination)) {
+	std::cin.clear();
+	std::cin.ignore(1024, '\n');
+	std::cout<<"   ***Invalid input, please re-enter***"<<std::endl;
+      }
       if (destination==0) {
 	timeline(std::cout,ref,Date(start),Date(end));//,style);
       } else {
