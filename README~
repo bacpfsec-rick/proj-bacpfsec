@@ -1,0 +1,219 @@
+Project     :     Bacpsec
+     (Balanced Accelerated Creative Parallel Stack Engineering Conquerer)
+
+Description :
+	    Back to August, 2014, an idea of making a personal multi-project 
+	    management software flash into my mind.
+	    Not until I saw the concept	of FSE(full stack engineer) 
+	    did I started the actual coding of Pfsee.
+	    With some casual time, the Pfsee1.0 is now released.
+	    The TUI is simple, but the idea behind it is attractive:
+	    Based on the knowledge of FSE and sub-consciousness,
+	    the most efficient way for multi-project management is to treat
+	    your brain as CPU, let the projects come across on the bus,
+	    then solve them by using DIVIDE AND CONQUER!
+
+********************************      Birth of Version 2     ************************************
+VERSION			    	Index	     	Description
+v0.1			  150212	Design basic data structure of the Pfsee	
+			  ADD		static vector<task> tasks;
+	    		  		read_tasks(ifstream& ifs, vector<task>& tasks);
+					read_states(ifstream& ifs, task& bk);
+					show_record(ostream& os, vector<task>& tasks);
+					write_record(ofstream& ofs, vector<task>& tasks);
+					instruct();
+v0.2	    150214~15	Improve the recording mechanism
+	    ADD		#define maxTaskInProgress 5
+	    		static bool recordLoaded;
+			static int startDate;
+			static int endDate;
+			static int numOfTaskUncomplete;
+			init();
+			brief_report(ostream& os, vector<task>& tasks);
+			print_day(ostream& os, int time);
+		       	next_day(int& today);
+			timeline(ofstream& os, vector<task>& tasks,
+					     int start, int end);
+	    MODIFY	everything in v0.1
+v0.3	    150215~16	Finish the task execution functions
+	    ADD		select_action(ostream& os, istream& is, 
+	    				     vector<task>& tasks);
+			select_task(ostream& os,istream& is, 
+					     vector<task>& tasks);
+			working(ostream& os, istream& is, 
+					     task& task, int& redo);
+	    MODIFY      everything in v0.2
+V1.0	    150216	Public the practical program at GitHub
+	    PUBLISH	pfsee.cc
+	    		Makefile
+			data.pfs
+V1.1        150217	Polish the TIMELINE and List Rec with <iomanip>
+	    REWORK	print_day(ostream& os, int time,int width);
+	    MODIFY	show_record(ostream& os, vector<task>& tasks);
+			timeline(ofstream& os, vector<task>& tasks,
+					     int start, int end);
+V1.2	    150311      Add option of cancelling task and debug for select_task
+	    ADD		static int numOfTaskCancelled;
+	    MODIFY	read_states(ifstream& ifs, task& bk);
+			working(ostream& os, istream& is, 
+					     task& task, int& redo);
+			brief_report(ostream& os, vector<task>& tasks);
+			select_task(ostream& os,istream& is, 
+					     vector<task>& tasks);
+V1.2.1	    150314      Improve the record of FINISH or CANCEL by marking
+	    MODIFY	working(ostream& os, istream& is, 
+					     task& task, int& redo);
+            RENAME      Pfsee -> Apfsec
+	    		Accelerated Parallel Full Stack Engineering Creator
+V1.2.2      150316	Debug and rename the program
+	    DEBUG	timeline(ofstream& os, vector<task>& tasks,
+					     int start, int end);
+
+	    RENAME	Apfsec -> Bacpfsec
+	    		Balanced Accelerated Creative Parallel
+			Full Stack Engineering Conqueror
+V1.2.3      150316      Slight modification
+
+
+********************************      Birth of Version 2     ************************************
+VERSION			    	Index	     	Description
+V2.0.0:Setting up	        d014f57		Setting up Makefile & README for Bacpfsec
+				       		ADD	Makefile
+			      	        		README.md
+				        		bfc.config
+V2.1.0:Impl Date Class		adffb3e 	Implement the basic Date Class
+				       		ADD	Date.h
+							Date.cc
+V2.1.1:Test Date Class		6367377		Test the basic Date class with CppUnitFixture
+				       		ISSUE: whether a date from input is valid
+				       		ADD	FixtureDate.h
+							TestDate.cc
+v2.1.2:I&T Date Class		7e9c7ce		Supply func. isValid to Date Class and test it
+				       		ISSUE: copy consturctor is missing
+				      		Modify	Date.h
+							Date.cc
+							FixtureDate.h
+v2.1.3:I&T Date Class		03cc828		Supply copy constructor to Date Class and test it
+						ISSUE: Date Class is provisionally completed
+				       		Modify	Date.h
+							Date.cc
+							FixtureDate.h
+V2.2.0:Impl State Class		940f7b0		Implement the basic Date Class
+						ADD	State.h
+							State.cc
+V2.2.1:Test State Class		e497a99		Test the baisc Date class with CppUnitFixture
+				       		ISSUE:	Only one State content allows for each day
+						ADD	FixtureState.h
+							TestState.cc
+v2.2.2:I&T State Class		0d04632		Supply func. merge to state class
+				       		ISSUE:	getDate() in State and Date is confusing
+						Modify	State.h
+							State.cc
+							FixtureState.h
+V2.2.3:I&T  Date Class		6cc9845		Rename members in Date to avoid confusion
+	      	   				ISSUE:	A variant to merge is needed
+							State should be merged based on state date
+	      	   				Modify	Date.h
+							Date.cc
+							FixtureDate.h
+							FixtureState.h
+V2.2.4:I&T Date Class		6fa928c		Append == and != operator
+	      	   				Modify	Date.h
+							Date.cc
+							FixtureDate.h
+V2.2.5:I&T State Class		7e40e6c		Provide merge on state
+						Modify	State.h
+							State.cc
+							FixtureState.h
+V2.3.0:Impl Task Class	   	98a0802		Implement the basic Task Class	
+						ADD	Task.h
+							Task.cc
+V2.3.1:Test Task Class		41145e8		Test the baisc Task class with CppUnitFixture    	 				
+	    	 				ADD	FixtureTask.h
+							TestTask.cc
+V2.4.0:I&T BfcPrototype		a97fdd2		Provide the prototype with basic setters and getters
+	    					ADD	BfcPrototype.h
+							BfcPrototype.cc
+	    	 					FixtureBfcPrototype.h
+							TestBfcPrototype.cc
+V2.4.1:I&T BfcPrototype		6d33be8		Impl&Test readStates function
+	   	 				Modify	BfcPrototype.h
+							BfcPrototype.cc
+							FixtureBfcPrototype.h
+V2.4.2:I&T BfcPrototype		645fbf6		Impl&Test readTasks function
+	   	 				Modify	BfcPrototype.h
+							BfcPrototype.cc
+							FixtureBfcPrototype.h
+V2.5.0:I&T BfcTUI Class		be847dd		Build TUI based on prototype
+	   					Add     BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
+							TestBfcTUI.h
+V2.5.1:I&T BfcTUI Class		e34d80b		I&T showRecord in BfcTUI
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
+V2.5.2:I&T BfcTUI Class		1bc2437		I&T writeRecord in BfcTUI
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
+V2.5.3:I&T BfcTUI Class		22ac6e0		I&T briefReport in BfcTUI
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
+V2.5.4:I&T BfcTUI Class		5fab881		I&T vertical timeline
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
+V2.5.5:I&T BfcTUI Class		03e5a96		I&T horizontal timeline
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
+V2.5.6:I&T BfcTUI Class		cfb1300		I&T selectTask
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							FixtureBfcTUI.h
+
+V2.5.7:Impl BfcTUI Class	45308b5		Impl selectAction & working
+	   	  				Modify  BfcTUI.h
+							BfcTUI.cc
+							BfcPrototype.h
+							BfcPrototype.cc
+V2.6.0:Impl BfcTerminal Class	13785a3		Impl instruction() method based on cout & cin
+	   	  				Add     BfcTerminal.h
+							BfcTerminal.cc
+V2.6.1:Impl BfcTerminal Class	51baeee		Impl run() based on polymorphisam
+	    	   				Modify  BfcTerminal.h
+							BfcTerminal.cc
+							BfcTUI.h
+							BfcTUI.cc
+							BfcPrototype.h
+							BfcPrototype.cc
+V2.7.0:Impl BfcTR.cc		2cab18b		Build the terminal-based executable
+	    					Add     BfcTR.cc
+V2.7.1:Debug BfcTR.cc		85512c7		Run and debug the executable
+	     					Modify	BfcTR.cc
+							BfcTUI.cc
+V3.0.0:Begin Refactor           8c38dcb         Set up for the factor refactor
+V3.1.0:Iml BfsTRI & BfcTRII     264c5fc         Build several factories
+	   	    				Add     Menu.h
+							MenuSimple.h
+							MenuSimple.cc
+							MenuDetail.h
+							MenuDetail.cc
+							Timeline.h
+							TimelineVer.h
+							TimelineVer.cc
+							TimelineHor.h
+							TimelineVec.cc
+							Setup.h
+							SteupI.h
+							BfcTRI.cc
+							SteupII.h
+							BfcTRII.cc
+						Remove	BfcTR.cc
+						Modify	BfcTUI.h
+							BfcTUI.cc
+							BfcTerminal.h
+							BfcTerminal.cc
+V3.2.0:Debug & Establish	6d84168         Bacpfsec is now on rails!
